@@ -58,13 +58,25 @@
 
   /* NAV */
   nav{background:var(--white);border-bottom:2px solid var(--ink);position:sticky;top:0;z-index:50}
-  nav .row{display:flex;align-items:center;justify-content:space-between;padding:13px 0}
+  /* Keep .wrap's 24px side padding — a bare `padding:13px 0` here outranks it
+     and pulls the nav 24px left of every other section. */
+  nav .row{display:flex;align-items:center;justify-content:space-between;padding:13px 24px}
   .brand{display:flex;align-items:center;gap:11px}
   .brand img{width:40px;height:40px;border:1.5px solid var(--ink);border-radius:var(--r);background:var(--white)}
   .brand b{font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.04em}
   .navlinks{display:flex;gap:24px;font-size:12px;font-weight:500;text-transform:uppercase}
   .navlinks a{padding-bottom:3px;border-bottom:2px solid transparent}
   .navlinks a:hover{border-color:var(--gold)}
+  .navright{display:flex;align-items:center;gap:12px}
+  /* Active language is ink-filled, not gold — gold stays the single action colour. */
+  .langsw{display:flex;border:1.5px solid var(--ink);border-radius:var(--r);overflow:hidden;flex-shrink:0}
+  .langsw button{
+    font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:7px 10px;border:0;background:var(--white);color:var(--ink);cursor:pointer;line-height:1;
+  }
+  .langsw button+button{border-left:1.5px solid var(--ink)}
+  .langsw button:hover{background:var(--gold-wash)}
+  .langsw button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
 
   /* HERO */
   .hero{padding:64px 0 0;position:relative}
@@ -178,6 +190,9 @@
   .flinks a{opacity:.75}
   .flinks a:hover{opacity:1}
 
+  @media(max-width:520px){
+    .brand b{display:none}
+  }
   @media(max-width:820px){
     .hero-grid,.split,.faq{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr}
@@ -194,34 +209,40 @@
   <div class="wrap row">
     <div class="brand"><img src="assets/logo.svg" alt="Club de lo Roto"><b>Club de lo Roto</b></div>
     <div class="navlinks">
-      <a href="#idea">La idea</a>
-      <a href="#estaciones">Estaciones</a>
-      <a href="#como">Cómo funciona</a>
-      <a href="#faq">Preguntas</a>
+      <a href="#idea" data-en="The idea">La idea</a>
+      <a href="#estaciones" data-en="Stations">Estaciones</a>
+      <a href="#como" data-en="How it works">Cómo funciona</a>
+      <a href="#faq" data-en="FAQ">Preguntas</a>
     </div>
-    <a href="#voluntarios" class="btn btn-gold btn-nav">Sé voluntario</a>
+    <div class="navright">
+      <div class="langsw" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a href="#voluntarios" class="btn btn-gold btn-nav" data-en="Volunteer">Sé voluntario</a>
+    </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Miami · Eventos comunitarios de reparación</p>
-      <h1 class="h-xl" style="margin-top:16px">Trae lo roto.<br>Nos sentamos.<br>Lo arreglamos.</h1>
-      <p class="sub">Un evento comunitario donde la gente trae objetos rotos — electrónica, muebles, bicicletas, ropa — y se sienta con un voluntario para intentar repararlos juntos, en vez de tirarlos.</p>
+      <p class="eyebrow" data-en="Miami · Community repair events">Miami · Eventos comunitarios de reparación</p>
+      <h1 class="h-xl" style="margin-top:16px" data-en-html="Bring what's broken.<br>We sit down.<br>We fix it.">Trae lo roto.<br>Nos sentamos.<br>Lo arreglamos.</h1>
+      <p class="sub" data-en="A community event where people bring broken things — electronics, furniture, bikes, clothes — and sit down with a volunteer to try to fix them together, instead of throwing them out.">Un evento comunitario donde la gente trae objetos rotos — electrónica, muebles, bicicletas, ropa — y se sienta con un voluntario para intentar repararlos juntos, en vez de tirarlos.</p>
       <div class="btnrow">
-        <a href="#voluntarios" class="btn btn-gold">Quiero ser voluntario →</a>
+        <a href="#voluntarios" class="btn btn-gold" data-en="I want to volunteer →">Quiero ser voluntario →</a>
         <a href="https://instagram.com/clubdeloroto" class="btn">Instagram</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="n">5</div><div class="l">Estaciones</div></div>
-        <div class="stat"><div class="n">$0</div><div class="l">Cuesta entrar</div></div>
-        <div class="stat"><div class="n">Miami</div><div class="l">Donde empezamos</div></div>
+        <div class="stat"><div class="n">5</div><div class="l" data-en="Stations">Estaciones</div></div>
+        <div class="stat"><div class="n">$0</div><div class="l" data-en="To get in">Cuesta entrar</div></div>
+        <div class="stat"><div class="n">Miami</div><div class="l" data-en="Where we start">Donde empezamos</div></div>
       </div>
     </div>
     <div class="logo-stage">
       <div class="logo-frame">
-        <span class="badge">Nuevo en Miami</span>
+        <span class="badge" data-en="New in Miami">Nuevo en Miami</span>
 
         <svg class="doodle doodle-stitch" viewBox="0 0 74 34" fill="none">
           <path d="M4 26c5-9 10-13 15-13M4 26l7-3M4 26l4 6M25 20c3-8 8-12 13-12M25 20l7-2M25 20l3 6M46 15c3-7 8-11 13-11M46 15l7-1M46 15l2 6M65 10l4-2" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -248,7 +269,7 @@
   <div class="mtrack">
     <!-- Edit the phrases here only — the script repeats this group to fill the screen. -->
     <div class="mgroup">
-      <span>Trae lo roto</span><span>◆</span><span>Lo arreglamos juntos</span><span>◆</span><span>Miami</span><span>◆</span><span>Reparar es resistir</span><span>◆</span>
+      <span data-en="Bring what's broken">Trae lo roto</span><span>◆</span><span data-en="We fix it together">Lo arreglamos juntos</span><span>◆</span><span>Miami</span><span>◆</span><span data-en="To repair is to resist">Reparar es resistir</span><span>◆</span>
     </div>
   </div>
 </div>
@@ -256,10 +277,10 @@
 <section id="idea">
   <div class="wrap split">
     <div>
-      <p class="eyebrow">La idea</p>
-      <h2 class="h-lg" style="margin-top:12px">Reparar en comunidad,<br>no en soledad</h2>
-      <p>La mayoría de las cosas que tiramos todavía se pueden salvar. Club de lo Roto junta a gente con herramientas y conocimiento — electricistas, carpinteros, costureras, mecánicos de bici — con vecinos que solo necesitan una mano y una mesa donde sentarse a intentarlo.</p>
-      <p>No prometemos que todo se arregle. Prometemos que vas a aprender algo, conocer a alguien, y dejar menos cosas en el basurero.</p>
+      <p class="eyebrow" data-en="The idea">La idea</p>
+      <h2 class="h-lg" style="margin-top:12px" data-en-html="Repair in community,<br>not in solitude">Reparar en comunidad,<br>no en soledad</h2>
+      <p data-en="Most of what we throw away can still be saved. Club de lo Roto brings together people with tools and know-how — electricians, carpenters, seamstresses, bike mechanics — and neighbours who just need a hand and a table to sit down and try.">La mayoría de las cosas que tiramos todavía se pueden salvar. Club de lo Roto junta a gente con herramientas y conocimiento — electricistas, carpinteros, costureras, mecánicos de bici — con vecinos que solo necesitan una mano y una mesa donde sentarse a intentarlo.</p>
+      <p data-en="We don't promise everything gets fixed. We promise you'll learn something, meet someone, and leave less behind in the dumpster.">No prometemos que todo se arregle. Prometemos que vas a aprender algo, conocer a alguien, y dejar menos cosas en el basurero.</p>
     </div>
     <div class="illo-card">
       <svg viewBox="0 0 260 220" width="100%" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -283,9 +304,9 @@
 <section id="estaciones" class="tight">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Estaciones</p>
-      <h2 class="h-lg">Dónde hacemos falta voluntarios</h2>
-      <p>Cada evento se organiza por categoría. No necesitas cubrirlas todas — con que sepas de una, nos ayudas.</p>
+      <p class="eyebrow" data-en="Stations">Estaciones</p>
+      <h2 class="h-lg" data-en="Where we need volunteers">Dónde hacemos falta voluntarios</h2>
+      <p data-en="Each event is organised by category. You don't need to cover them all — knowing one is enough to help.">Cada evento se organiza por categoría. No necesitas cubrirlas todas — con que sepas de una, nos ayudas.</p>
     </div>
     <div class="stations">
       <div class="card">
@@ -294,9 +315,9 @@
           <path d="M18 16v-5a6 6 0 0112 0v5" stroke="#b98d0f"/>
           <path d="M24 22v5l-4 4h8" stroke="#b5482a"/>
         </svg>
-        <h3>Electrónica</h3>
-        <p>Lámparas, licuadoras, ventiladores, cables, cargadores.</p>
-        <span class="tag">Más pedida</span>
+        <h3 data-en="Electronics">Electrónica</h3>
+        <p data-en="Lamps, blenders, fans, cables, chargers.">Lámparas, licuadoras, ventiladores, cables, cargadores.</p>
+        <span class="tag" data-en="Most requested">Más pedida</span>
       </div>
       <div class="card">
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -304,18 +325,18 @@
           <path d="M16 20v-8a4 4 0 014-4h8a4 4 0 014 4v8" stroke="#b98d0f"/>
           <path d="M20 27l4 5 4-5" stroke="#b5482a"/>
         </svg>
-        <h3>Muebles</h3>
-        <p>Sillas, mesas, cajones, ensambles sueltos.</p>
-        <span class="tag">Madera</span>
+        <h3 data-en="Furniture">Muebles</h3>
+        <p data-en="Chairs, tables, drawers, loose joints.">Sillas, mesas, cajones, ensambles sueltos.</p>
+        <span class="tag" data-en="Wood">Madera</span>
       </div>
       <div class="card">
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="13" cy="31" r="8"/><circle cx="35" cy="31" r="8"/>
           <path d="M13 31l8-14h9l5 14" stroke="#b98d0f"/><path d="M19 17h8"/>
         </svg>
-        <h3>Bicicletas</h3>
-        <p>Frenos, cadenas, llantas, ajustes generales.</p>
-        <span class="tag">Ruedas</span>
+        <h3 data-en="Bicycles">Bicicletas</h3>
+        <p data-en="Brakes, chains, tyres, general tune-ups.">Frenos, cadenas, llantas, ajustes generales.</p>
+        <span class="tag" data-en="Wheels">Ruedas</span>
       </div>
       <div class="card">
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -323,18 +344,18 @@
           <path d="M20 28c3 3 5 3 8 0s5-3 8 0" stroke="#b5482a"/>
           <circle cx="24" cy="18" r="1.6" stroke="#b98d0f"/>
         </svg>
-        <h3>Ropa y textiles</h3>
-        <p>Costuras, cierres, dobladillos, remiendos.</p>
-        <span class="tag">Tela</span>
+        <h3 data-en="Clothing & textiles">Ropa y textiles</h3>
+        <p data-en="Seams, zips, hems, patches.">Costuras, cierres, dobladillos, remiendos.</p>
+        <span class="tag" data-en="Fabric">Tela</span>
       </div>
       <div class="card">
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M30 12a8 8 0 00-10 10L10 32a4 4 0 006 6l10-10a8 8 0 0010-10l-5 5-5-1-1-5z" stroke="#b98d0f"/>
           <path d="M15 33l2 2" stroke="#b5482a"/>
         </svg>
-        <h3>General</h3>
-        <p>Manitas, ideas, y ganas de ayudar donde se necesite.</p>
-        <span class="tag">Todo lo demás</span>
+        <h3 data-en="General">General</h3>
+        <p data-en="Handy hands, ideas, and the will to help wherever it's needed.">Manitas, ideas, y ganas de ayudar donde se necesite.</p>
+        <span class="tag" data-en="Everything else">Todo lo demás</span>
       </div>
     </div>
   </div>
@@ -343,16 +364,16 @@
 <section id="como">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Cómo funciona</p>
-      <h2 class="h-lg">Ser voluntario, paso a paso</h2>
+      <p class="eyebrow" data-en="How it works">Cómo funciona</p>
+      <h2 class="h-lg" data-en="Volunteering, step by step">Ser voluntario, paso a paso</h2>
     </div>
     <div class="steps">
       <svg class="steps-link" viewBox="0 0 1200 40" preserveAspectRatio="none" fill="none">
         <path d="M180 20c60-14 130-14 210 0s150 14 210 0 150-14 210 0 150 14 210 0" stroke="#141210" stroke-width="2" stroke-dasharray="1 11" stroke-linecap="round" opacity=".35"/>
       </svg>
-      <div class="step"><span class="num">1</span><h3>Llenas el formulario</h3><p>Nos dices qué sabes hacer y cuándo tienes tiempo libre. Toma dos minutos.</p></div>
-      <div class="step"><span class="num">2</span><h3>Te contactamos</h3><p>Te escribimos antes del próximo evento para confirmar tu estación y la hora.</p></div>
-      <div class="step"><span class="num">3</span><h3>Reparamos juntos</h3><p>Llegas, te instalas en tu mesa, y ayudas a alguien a salvar algo que quiere.</p></div>
+      <div class="step"><span class="num">1</span><h3 data-en="You fill out the form">Llenas el formulario</h3><p data-en="Tell us what you know how to do and when you're free. Takes two minutes.">Nos dices qué sabes hacer y cuándo tienes tiempo libre. Toma dos minutos.</p></div>
+      <div class="step"><span class="num">2</span><h3 data-en="We get in touch">Te contactamos</h3><p data-en="We'll write before the next event to confirm your station and time.">Te escribimos antes del próximo evento para confirmar tu estación y la hora.</p></div>
+      <div class="step"><span class="num">3</span><h3 data-en="We repair together">Reparamos juntos</h3><p data-en="You arrive, settle in at your table, and help someone save something they care about.">Llegas, te instalas en tu mesa, y ayudas a alguien a salvar algo que quiere.</p></div>
     </div>
   </div>
 </section>
@@ -361,7 +382,7 @@
   <div class="wrap" style="display:flex;justify-content:center">
     <div class="manifesto">
       <span class="qm">"</span>
-      <p>Cada objeto roto tiene una historia. Nosotros no la tiramos — la seguimos escribiendo, con quien la sepa continuar.</p>
+      <p data-en="Every broken object has a story. We don't throw it away — we keep writing it, with whoever knows how to continue it.">Cada objeto roto tiene una historia. Nosotros no la tiramos — la seguimos escribiendo, con quien la sepa continuar.</p>
       <p class="at">Club de lo Roto · Miami, FL</p>
       <svg class="doodle doodle-crack" viewBox="0 0 64 30" fill="none">
         <path d="M2 4c8 3 10 8 6 12s-2 8 5 8 8 4 3 6" stroke="#141210" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -374,14 +395,14 @@
 <section id="faq" class="tight">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Preguntas</p>
-      <h2 class="h-lg">Antes de registrarte</h2>
+      <p class="eyebrow" data-en="FAQ">Preguntas</p>
+      <h2 class="h-lg" data-en="Before you sign up">Antes de registrarte</h2>
     </div>
     <div class="faq">
-      <div class="qa"><h3>¿Tengo que ser profesional?</h3><p>No. Si arreglas cosas en tu casa por hobby, ya sabes suficiente para ayudar en una mesa.</p></div>
-      <div class="qa"><h3>¿Tengo que llevar herramientas?</h3><p>Si tienes las tuyas, mejor. Si no, coordinamos lo básico antes del evento.</p></div>
-      <div class="qa"><h3>¿Cuánto dura un evento?</h3><p>Unas tres o cuatro horas, un fin de semana. No tienes que quedarte todo el tiempo.</p></div>
-      <div class="qa"><h3>¿Se paga algo?</h3><p>Es gratis para todos, y el voluntariado no es pagado. Aceptamos donaciones para cubrir costos.</p></div>
+      <div class="qa"><h3 data-en="Do I have to be a professional?">¿Tengo que ser profesional?</h3><p data-en="No. If you fix things at home as a hobby, you already know enough to help at a table.">No. Si arreglas cosas en tu casa por hobby, ya sabes suficiente para ayudar en una mesa.</p></div>
+      <div class="qa"><h3 data-en="Do I need to bring tools?">¿Tengo que llevar herramientas?</h3><p data-en="If you have your own, even better. If not, we'll sort out the basics before the event.">Si tienes las tuyas, mejor. Si no, coordinamos lo básico antes del evento.</p></div>
+      <div class="qa"><h3 data-en="How long is an event?">¿Cuánto dura un evento?</h3><p data-en="About three or four hours, on a weekend. You don't have to stay the whole time.">Unas tres o cuatro horas, un fin de semana. No tienes que quedarte todo el tiempo.</p></div>
+      <div class="qa"><h3 data-en="Is there any cost?">¿Se paga algo?</h3><p data-en="It's free for everyone, and volunteering is unpaid. We accept donations to cover costs.">Es gratis para todos, y el voluntariado no es pagado. Aceptamos donaciones para cubrir costos.</p></div>
     </div>
   </div>
 </section>
@@ -397,53 +418,54 @@
 <section id="voluntarios" class="form-sec">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Únete</p>
-      <h2 class="h-lg">Regístrate como voluntario</h2>
-      <p>No necesitas ser experto — solo tener ganas de ayudar y algo de experiencia en tu categoría.</p>
+      <p class="eyebrow" data-en="Join us">Únete</p>
+      <h2 class="h-lg" data-en="Sign up as a volunteer">Regístrate como voluntario</h2>
+      <p data-en="You don't need to be an expert — just willing to help, with some experience in your category.">No necesitas ser experto — solo tener ganas de ayudar y algo de experiencia en tu categoría.</p>
     </div>
-    <div class="ok" id="ok">¡Gracias! Recibimos tu registro y te contactaremos antes del próximo evento.</div>
-    <p class="err" id="errSend" style="margin-bottom:22px">Algo salió mal enviando el formulario. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
+    <div class="ok" id="ok" data-en="Thanks! We got your sign-up and we'll be in touch before the next event.">¡Gracias! Recibimos tu registro y te contactaremos antes del próximo evento.</div>
+    <p class="err" id="errSend" style="margin-bottom:22px" data-en="Something went wrong sending the form. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal enviando el formulario. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
     <form id="vf" novalidate action="https://formspree.io/f/xyeygvag" method="POST">
       <div>
-        <label for="name">Nombre completo</label>
-        <input type="text" id="name" name="name" placeholder="Tu nombre">
-        <p class="err" id="errName">Escribe tu nombre.</p>
+        <label for="name" data-en="Full name">Nombre completo</label>
+        <input type="text" id="name" name="name" placeholder="Tu nombre" data-en-ph="Your name">
+        <p class="err" id="errName" data-en="Enter your name.">Escribe tu nombre.</p>
       </div>
       <div>
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com">
-        <p class="err" id="errEmail">Escribe un correo válido.</p>
+        <label for="email" data-en="Email">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
+        <p class="err" id="errEmail" data-en="Enter a valid email.">Escribe un correo válido.</p>
       </div>
       <div>
-        <label for="phone">Teléfono (opcional)</label>
+        <label for="phone" data-en="Phone (optional)">Teléfono (opcional)</label>
         <input type="tel" id="phone" name="phone" placeholder="305-000-0000">
       </div>
       <div>
-        <label for="avail">Disponibilidad</label>
+        <label for="avail" data-en="Availability">Disponibilidad</label>
+        <!-- Values stay in Spanish so submissions read consistently regardless of UI language. -->
         <select id="avail" name="disponibilidad">
-          <option>Fines de semana</option>
-          <option>Entre semana, en la tarde</option>
-          <option>Flexible</option>
+          <option value="Fines de semana" data-en="Weekends">Fines de semana</option>
+          <option value="Entre semana, en la tarde" data-en="Weekdays, evenings">Entre semana, en la tarde</option>
+          <option value="Flexible" data-en="Flexible">Flexible</option>
         </select>
       </div>
       <div class="full">
-        <label>¿En qué estación te gustaría ayudar?</label>
+        <label data-en="Which station would you like to help at?">¿En qué estación te gustaría ayudar?</label>
         <div class="checks">
-          <label><input type="checkbox" name="estaciones" value="Electrónica"> Electrónica</label>
-          <label><input type="checkbox" name="estaciones" value="Muebles"> Muebles</label>
-          <label><input type="checkbox" name="estaciones" value="Bicicletas"> Bicicletas</label>
-          <label><input type="checkbox" name="estaciones" value="Ropa y textiles"> Ropa y textiles</label>
-          <label><input type="checkbox" name="estaciones" value="General"> General</label>
+          <label><input type="checkbox" name="estaciones" value="Electrónica"> <span data-en="Electronics">Electrónica</span></label>
+          <label><input type="checkbox" name="estaciones" value="Muebles"> <span data-en="Furniture">Muebles</span></label>
+          <label><input type="checkbox" name="estaciones" value="Bicicletas"> <span data-en="Bicycles">Bicicletas</span></label>
+          <label><input type="checkbox" name="estaciones" value="Ropa y textiles"> <span data-en="Clothing &amp; textiles">Ropa y textiles</span></label>
+          <label><input type="checkbox" name="estaciones" value="General"> <span data-en="General">General</span></label>
         </div>
       </div>
       <div class="full">
-        <label for="exp">Cuéntanos tu experiencia (opcional)</label>
-        <textarea id="exp" name="experiencia" placeholder="¿Qué sabes reparar? ¿Lo haces por trabajo, hobby, o ambos?"></textarea>
+        <label for="exp" data-en="Tell us about your experience (optional)">Cuéntanos tu experiencia (opcional)</label>
+        <textarea id="exp" name="experiencia" placeholder="¿Qué sabes reparar? ¿Lo haces por trabajo, hobby, o ambos?" data-en-ph="What can you repair? Is it work, a hobby, or both?"></textarea>
       </div>
       <div class="full">
         <input type="hidden" name="_subject" value="Nuevo voluntario — Club de lo Roto">
-        <button type="submit" class="btn btn-gold">Enviar registro →</button>
-        <p class="note">Al enviar aceptas que te contactemos sobre próximos eventos de Club de lo Roto. No compartimos tu información con nadie más.</p>
+        <button type="submit" class="btn btn-gold" data-en="Send sign-up →">Enviar registro →</button>
+        <p class="note" data-en="By submitting you agree that we may contact you about upcoming Club de lo Roto events. We don't share your information with anyone else.">Al enviar aceptas que te contactemos sobre próximos eventos de Club de lo Roto. No compartimos tu información con nadie más.</p>
       </div>
     </form>
   </div>
@@ -469,10 +491,19 @@
     if(!track)return;
     var group=track.querySelector('.mgroup');
     if(!group)return;
+    var tries=0;
     function fill(){
       while(track.children.length>1)track.removeChild(track.lastChild);
       var w=group.getBoundingClientRect().width;
-      if(!w)return;
+      /* On a cold load the webfont may not have arrived, so the group can
+         measure 0. Bailing here would strand the marquee at one group, so
+         retry shortly instead. setTimeout rather than rAF, because rAF is
+         paused in background tabs. */
+      if(!w){
+        if(tries++<40)setTimeout(fill,50);
+        return;
+      }
+      tries=0;
       track.style.setProperty('--mw',w+'px');
       var need=Math.ceil(window.innerWidth/w)+1;
       for(var i=1;i<need;i++){
@@ -481,6 +512,7 @@
         track.appendChild(c);
       }
     }
+    window.__fillMarquee=fill;
     fill();
     var last=window.innerWidth;
     function recheck(){
@@ -494,6 +526,50 @@
     var t;
     window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(recheck,150)});
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fill);
+  })();
+
+  /* Language switch. Spanish is the markup default (so it is what search
+     engines and no-JS visitors get); English lives alongside it in data-en
+     attributes, so each string's two versions sit next to each other. */
+  (function(){
+    var KEY='cdlr-lang';
+    var btns=Array.prototype.slice.call(document.querySelectorAll('.langsw button'));
+    var titles={
+      es:'Club de lo Roto — Reparación comunitaria en Miami',
+      en:'Club de lo Roto — Community repair in Miami'
+    };
+    function swap(sel,enKey,esKey,get,set){
+      document.querySelectorAll(sel).forEach(function(el){
+        if(el.dataset[esKey]===undefined)el.dataset[esKey]=get(el);
+        set(el, window.__lang==='en' ? el.dataset[enKey] : el.dataset[esKey]);
+      });
+    }
+    function apply(lang){
+      window.__lang=lang;
+      document.documentElement.lang=lang;
+      document.title=titles[lang];
+      swap('[data-en]','en','esText',
+        function(el){return el.textContent},
+        function(el,v){el.textContent=v});
+      swap('[data-en-html]','enHtml','esHtml',
+        function(el){return el.innerHTML},
+        function(el,v){el.innerHTML=v});
+      swap('[data-en-ph]','enPh','esPh',
+        function(el){return el.placeholder},
+        function(el,v){el.placeholder=v});
+      btns.forEach(function(b){
+        b.setAttribute('aria-pressed', String(b.dataset.lang===lang));
+      });
+      /* Phrase widths changed, so the marquee needs re-measuring. */
+      if(window.__fillMarquee)window.__fillMarquee();
+      try{localStorage.setItem(KEY,lang)}catch(e){}
+    }
+    btns.forEach(function(b){
+      b.addEventListener('click',function(){apply(b.dataset.lang)});
+    });
+    var saved=null;
+    try{saved=localStorage.getItem(KEY)}catch(e){}
+    apply(saved || (/^en\b/i.test(navigator.language||'') ? 'en' : 'es'));
   })();
 
   var f=document.getElementById('vf'),ok=document.getElementById('ok');
