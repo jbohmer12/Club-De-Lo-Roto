@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Club de lo Roto — Reparación comunitaria en Miami</title>
-<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -157,9 +157,12 @@
   .qa h3{font-size:15px;font-weight:600;letter-spacing:0;margin-bottom:9px}
   .qa p{font-size:14px;opacity:.75}
 
-  /* KINTSUGI SEAM */
-  .seam{background:var(--cream);line-height:0}
-  .seam svg{display:block;width:100%;height:auto}
+  /* KINTSUGI SEAM — transparent so the page's dotted cream runs through it;
+     -1px margin closes any subpixel gap against the dark section below. */
+  .seam{line-height:0;margin-bottom:-1px}
+  /* Fixed-ish height rather than `auto`: at `auto` the band scales with width
+     and collapses to ~11px on phones, thinning the gold vein to a hairline. */
+  .seam svg{display:block;width:100%;height:clamp(30px,3.4vw,58px)}
 
   /* FORM */
   .form-sec{background:var(--ink);color:var(--cream)}
@@ -407,9 +410,12 @@
   </div>
 </section>
 
-<div class="seam">
+<div class="seam" aria-hidden="true">
   <svg viewBox="0 0 1200 36" preserveAspectRatio="none">
-    <rect width="1200" height="36" fill="#fff6eb"/>
+    <!-- Everything below the wave is filled ink, so the wave itself IS the
+         edge of the dark section — there is no straight seam left to show.
+         The cream above is the page background, dots and all. -->
+    <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7V36H0Z" fill="#141210"/>
     <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7" fill="none" stroke="#141210" stroke-width="10"/>
     <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7" fill="none" stroke="#e5b415" stroke-width="4"/>
   </svg>
@@ -505,7 +511,9 @@
       }
       tries=0;
       track.style.setProperty('--mw',w+'px');
-      var need=Math.ceil(window.innerWidth/w)+1;
+      /* Never fewer than two groups: the track scrolls by exactly one group
+         width, so a lone group would leave the strip empty mid-cycle. */
+      var need=Math.max(2,Math.ceil(window.innerWidth/w)+1);
       for(var i=1;i<need;i++){
         var c=group.cloneNode(true);
         c.setAttribute('aria-hidden','true');
