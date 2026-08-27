@@ -235,3 +235,27 @@
       .finally(function(){btn.disabled=false});
   });
 }
+
+  /* Newsletter sign-up (boletin.html): email only, reusing the shared
+     success dialog. Kept separate from the volunteer form above, which
+     expects fields this page does not have. */
+  var nf=document.getElementById('nf');
+  if(nf){
+    var ne=document.getElementById('nlEmail');
+    var nee=document.getElementById('nlErrEmail'),nes=document.getElementById('nlErrSend');
+    var nbtn=nf.querySelector('button[type=submit]');
+    ne.addEventListener('input',function(){nee.style.display='none'});
+    nf.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      nes.style.display='none';
+      if(!/^\S+@\S+\.\S+$/.test(ne.value.trim())){nee.style.display='block';return}
+      nbtn.disabled=true;
+      fetch(nf.action,{method:'POST',body:new FormData(nf),headers:{'Accept':'application/json'}})
+        .then(function(res){
+          if(res.ok){nf.reset();okModal.open();}
+          else{nes.style.display='block'}
+        })
+        .catch(function(){nes.style.display='block'})
+        .finally(function(){nbtn.disabled=false});
+    });
+  }

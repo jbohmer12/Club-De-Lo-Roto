@@ -59,7 +59,18 @@
       </svg>
       <h2 data-en="This one's still on the repair table.">Esto todavía está en la mesa de reparación.</h2>
       <p data-en="Nothing published yet — we're busy fixing other things first. Sign up and we'll let you know the moment the first issue is back in one piece.">Todavía no publicamos nada — estamos ocupados arreglando otras cosas primero. Regístrate y te avisamos apenas el primero esté entero.</p>
-      <a href="index.html#voluntarios" class="btn btn-gold" data-en="Sign me up →">Quiero que me avisen →</a>
+      <form id="nf" class="nl-form" novalidate action="https://formspree.io/f/xyeygvag" method="POST">
+        <label class="sr-only" for="nlEmail" data-en="Email">Correo electrónico</label>
+        <div class="nl-row">
+          <input type="email" id="nlEmail" name="email" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
+          <button type="submit" class="btn btn-gold" data-en="Sign me up →">Quiero que me avisen →</button>
+        </div>
+        <p class="err" id="nlErrEmail" data-en="Enter a valid email.">Escribe un correo válido.</p>
+        <p class="err" id="nlErrSend" data-en="Something went wrong. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
+        <!-- Labels this as a newsletter sign-up in the shared Formspree inbox. -->
+        <input type="hidden" name="tipo" value="Boletín">
+        <input type="hidden" name="_subject" value="Nuevo suscriptor — Boletín Club de lo Roto">
+      </form>
     </div>
   </div>
 </section>
@@ -83,6 +94,23 @@
     <div style="opacity:.6">Miami, FL</div>
   </div>
 </footer>
+
+<div class="modal" id="okModal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="okTitle" aria-describedby="okBody">
+    <button type="button" class="modal-x" data-close aria-label="Cerrar" data-en-aria="Close">×</button>
+    <svg class="modal-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <circle cx="32" cy="32" r="27" fill="#e5b415" stroke="#141210" stroke-width="3"/>
+      <path d="M20 33l9 9 16-19" stroke="#141210" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2 id="okTitle" data-en="You're on the list!">¡Quedaste en la lista!</h2>
+    <p id="okBody" data-en="We'll write the moment the first issue is back in one piece.">Te escribimos apenas el primer boletín esté entero.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-gold" data-close data-en="Close">Cerrar</button>
+    </div>
+  </div>
+</div>
 
 <script src="assets/app.js"></script>
 </body>

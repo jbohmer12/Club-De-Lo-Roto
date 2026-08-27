@@ -158,6 +158,20 @@
   .empty-illo{width:210px;height:auto;margin:0 auto 24px}
   .empty-card h2,.empty-card h3{font-size:19px;font-weight:600;letter-spacing:0;margin-bottom:10px}
   .empty-card p{font-size:14.5px;opacity:.75;margin:0 auto 24px;max-width:46ch}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .nl-form{max-width:440px;margin:0 auto}
+  .nl-row{display:flex;gap:12px;align-items:stretch}
+  /* [type=email] needed: the generic input rule in the FORM block has equal
+     specificity and comes later, so it would win and paint the border cream. */
+  .nl-row input[type=email]{
+    flex:1;min-width:0;background:var(--cream);border:2px solid var(--ink);color:var(--ink);
+    padding:12px 14px;border-radius:var(--r);font-family:inherit;font-size:14px;
+  }
+  .nl-row input[type=email]:focus{outline:none;border-color:var(--gold-deep)}
+  .nl-row .btn{white-space:nowrap}
+  /* The dark section's errors are gold; on this white card that is unreadable. */
+  .nl-form .err{color:var(--rust);text-align:center;margin-top:12px}
+  @media(max-width:560px){.nl-row{flex-direction:column}}
   @media(max-width:520px){.empty-card{padding:32px 22px}}
 
   /* KINTSUGI SEAM — transparent so the page's dotted cream runs through it;
