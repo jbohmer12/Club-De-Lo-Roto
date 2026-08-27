@@ -183,7 +183,34 @@
   .checks input{width:auto}
   .err{display:none;color:var(--gold);font-size:12.5px;margin-top:7px}
   .note{font-size:12px;opacity:.5;margin-top:15px;max-width:58ch}
-  .ok{display:none;background:var(--gold);color:var(--ink);border:2px solid var(--cream);border-radius:var(--r);padding:17px 19px;font-weight:600;margin-bottom:22px;font-size:14px}
+
+  /* SUCCESS MODAL */
+  .modal[hidden]{display:none}
+  .modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}
+  .modal-backdrop{position:absolute;inset:0;z-index:1;background:rgba(20,18,16,.74);animation:mfade .18s ease both}
+  .confetti{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none}
+  .modal-card{
+    position:relative;z-index:3;background:var(--white);color:var(--ink);
+    border:2px solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);
+    padding:40px;max-width:460px;width:100%;text-align:center;
+    animation:mpop .3s cubic-bezier(.2,.9,.3,1.2) both;
+  }
+  .modal-mark{width:64px;height:64px;margin:0 auto 18px}
+  .modal-card h2{font-size:27px;font-weight:600;letter-spacing:.02em;margin-bottom:10px}
+  .modal-card p{font-size:15px;opacity:.78;margin-bottom:26px}
+  .modal-x{
+    position:absolute;top:9px;right:9px;width:30px;height:30px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:inherit;font-size:17px;line-height:1;
+    background:var(--white);border:1.5px solid var(--ink);border-radius:var(--r);
+    color:var(--ink);cursor:pointer;transition:background .09s ease;
+  }
+  .modal-x:hover{background:var(--gold-wash)}
+  @keyframes mfade{from{opacity:0}to{opacity:1}}
+  @keyframes mpop{from{opacity:0;transform:translateY(12px) scale(.93)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){
+    .modal-backdrop,.modal-card{animation-duration:.01ms}
+  }
 
   footer{background:var(--cream);border-top:2px solid var(--ink);padding:56px 0}
   .frow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;font-size:13px}
@@ -428,7 +455,6 @@
       <h2 class="h-lg" data-en="Sign up as a volunteer">Regístrate como voluntario</h2>
       <p data-en="You don't need to be an expert — just willing to help, with some experience in your category.">No necesitas ser experto — solo tener ganas de ayudar y algo de experiencia en tu categoría.</p>
     </div>
-    <div class="ok" id="ok" data-en="Thanks! We got your sign-up and we'll be in touch before the next event.">¡Gracias! Recibimos tu registro y te contactaremos antes del próximo evento.</div>
     <p class="err" id="errSend" style="margin-bottom:22px" data-en="Something went wrong sending the form. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal enviando el formulario. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
     <form id="vf" novalidate action="https://formspree.io/f/xyeygvag" method="POST">
       <div>
@@ -487,6 +513,23 @@
     <div style="opacity:.6">Miami, FL</div>
   </div>
 </footer>
+
+<div class="modal" id="okModal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <!-- Confetti sits above the backdrop but behind the card, so it reads as
+       bursting out from around the popup and never crosses the message. -->
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="okTitle" aria-describedby="okBody">
+    <button type="button" class="modal-x" data-close aria-label="Cerrar" data-en-aria="Close">×</button>
+    <svg class="modal-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <circle cx="32" cy="32" r="27" fill="#e5b415" stroke="#141210" stroke-width="3"/>
+      <path d="M20 33l9 9 16-19" stroke="#141210" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2 id="okTitle" data-en="Thanks!">¡Gracias!</h2>
+    <p id="okBody" data-en="We got your sign-up and we'll be in touch before the next event.">Recibimos tu registro y te contactaremos antes del próximo evento.</p>
+    <button type="button" class="btn btn-gold" data-close data-en="Close">Cerrar</button>
+  </div>
+</div>
 
 <script>
   /* Marquee: repeat the phrase group until the track is at least one group
@@ -565,6 +608,9 @@
       swap('[data-en-ph]','enPh','esPh',
         function(el){return el.placeholder},
         function(el,v){el.placeholder=v});
+      swap('[data-en-aria]','enAria','esAria',
+        function(el){return el.getAttribute('aria-label')},
+        function(el,v){el.setAttribute('aria-label',v)});
       btns.forEach(function(b){
         b.setAttribute('aria-pressed', String(b.dataset.lang===lang));
       });
@@ -580,7 +626,97 @@
     apply(saved || (/^en\b/i.test(navigator.language||'') ? 'en' : 'es'));
   })();
 
-  var f=document.getElementById('vf'),ok=document.getElementById('ok');
+  /* Success modal + confetti. Flat rectangular pieces in the brand palette,
+     drawn on canvas — no gradients, matching the rest of the system. */
+  var okModal=(function(){
+    var modal=document.getElementById('okModal');
+    var card=modal.querySelector('.modal-card');
+    var canvas=document.getElementById('confetti');
+    var ctx=canvas.getContext('2d');
+    var raf=null,lastFocus=null;
+    var COLORS=['#e5b415','#b98d0f','#b5482a','#2b6f68','#141210','#fff6eb'];
+    function reduced(){
+      return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    function clear(){ctx.clearRect(0,0,canvas.width,canvas.height)}
+    function burst(){
+      var dpr=Math.min(window.devicePixelRatio||1,2);
+      var w=modal.clientWidth,h=modal.clientHeight;
+      canvas.width=w*dpr;canvas.height=h*dpr;
+      canvas.style.width=w+'px';canvas.style.height=h+'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      var m=modal.getBoundingClientRect(),c=card.getBoundingClientRect();
+      var cx=c.left-m.left+c.width/2, cy=c.top-m.top+c.height/2;
+      var parts=[];
+      for(var i=0;i<90;i++){
+        var a=Math.random()*Math.PI*2, sp=4+Math.random()*7;
+        parts.push({
+          x:cx+(Math.random()-0.5)*c.width*0.85,
+          y:cy+(Math.random()-0.5)*c.height*0.55,
+          vx:Math.cos(a)*sp, vy:Math.sin(a)*sp-3.5,
+          w:5+Math.random()*6, h:3+Math.random()*4,
+          rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.32,
+          col:COLORS[i%COLORS.length]
+        });
+      }
+      var start=null;
+      function frame(now){
+        if(start===null)start=now;
+        var t=now-start, life=Math.max(0,1-t/2600), alive=false;
+        ctx.clearRect(0,0,w,h);
+        for(var j=0;j<parts.length;j++){
+          var p=parts[j];
+          p.vy+=0.19; p.vx*=0.99; p.vy*=0.99;
+          p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+          if(life>0&&p.y<h+50)alive=true;
+          ctx.save();
+          ctx.globalAlpha=life;
+          ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+          ctx.fillStyle=p.col;
+          ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+          ctx.restore();
+        }
+        if(alive&&!modal.hidden)raf=requestAnimationFrame(frame);
+        else clear();
+      }
+      raf=requestAnimationFrame(frame);
+    }
+    function focusables(){
+      return card.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
+    }
+    function onKey(e){
+      if(e.key==='Escape'){close();return}
+      if(e.key!=='Tab')return;
+      var f=focusables();
+      if(!f.length)return;
+      var first=f[0],last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+    }
+    function open(){
+      lastFocus=document.activeElement;
+      modal.hidden=false;
+      document.body.style.overflow='hidden';
+      document.addEventListener('keydown',onKey);
+      card.querySelector('.modal-x').focus();
+      if(!reduced())burst();
+    }
+    function close(){
+      if(modal.hidden)return;
+      modal.hidden=true;
+      if(raf)cancelAnimationFrame(raf);
+      raf=null; clear();
+      document.body.style.overflow='';
+      document.removeEventListener('keydown',onKey);
+      if(lastFocus&&lastFocus.focus)lastFocus.focus();
+    }
+    modal.querySelectorAll('[data-close]').forEach(function(el){
+      el.addEventListener('click',close);
+    });
+    return {open:open,close:close};
+  })();
+
+  var f=document.getElementById('vf');
   var n=document.getElementById('name'),e=document.getElementById('email');
   var en=document.getElementById('errName'),ee=document.getElementById('errEmail'),es=document.getElementById('errSend');
   var btn=f.querySelector('button[type=submit]');
@@ -597,9 +733,8 @@
     fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
       .then(function(res){
         if(res.ok){
-          ok.style.display='block';
-          ok.scrollIntoView({behavior:'smooth',block:'center'});
           f.reset();
+          okModal.open();
         }else{
           es.style.display='block';
           es.scrollIntoView({behavior:'smooth',block:'center'});
