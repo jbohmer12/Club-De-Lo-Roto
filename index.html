@@ -62,7 +62,7 @@
      and pulls the nav 24px left of every other section. */
   nav .row{display:flex;align-items:center;justify-content:space-between;padding:13px 24px}
   .brand{display:flex;align-items:center;gap:11px}
-  .brand img{width:40px;height:40px;border:1.5px solid var(--ink);border-radius:var(--r);background:var(--white)}
+  .brand img{width:54px;height:54px;border:1.5px solid var(--ink);border-radius:var(--r);background:var(--white)}
   .brand b{font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.04em}
   .navlinks{display:flex;gap:24px;font-size:12px;font-weight:500;text-transform:uppercase}
   .navlinks a{padding-bottom:3px;border-bottom:2px solid transparent}
@@ -157,6 +157,16 @@
   .qa h3{font-size:15px;font-weight:600;letter-spacing:0;margin-bottom:9px}
   .qa p{font-size:14px;opacity:.75}
 
+  /* NEWSLETTER EMPTY STATE */
+  .empty-card{
+    background:var(--white);border:2px solid var(--ink);border-radius:var(--r);
+    box-shadow:var(--sh);padding:44px 40px;max-width:640px;margin:0 auto;text-align:center;
+  }
+  .empty-illo{width:210px;height:auto;margin:0 auto 24px}
+  .empty-card h3{font-size:19px;font-weight:600;letter-spacing:0;margin-bottom:10px}
+  .empty-card p{font-size:14.5px;opacity:.75;margin:0 auto 24px;max-width:46ch}
+  @media(max-width:520px){.empty-card{padding:32px 22px}}
+
   /* KINTSUGI SEAM — transparent so the page's dotted cream runs through it;
      -1px margin closes any subpixel gap against the dark section below. */
   .seam{line-height:0;margin-bottom:-1px}
@@ -191,14 +201,20 @@
   textarea{min-height:98px;resize:vertical}
   .checks{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;background:var(--cream);border:2px solid var(--cream);border-radius:var(--r);padding:15px}
   .checks label{display:flex;align-items:center;gap:11px;text-transform:none;letter-spacing:0;font-size:14px;font-weight:400;opacity:1;margin:0;color:var(--ink)}
-  .checks input[type=checkbox]{
+  .optin{
+    display:flex;align-items:center;gap:11px;cursor:pointer;
+    background:var(--cream);border:2px solid var(--cream);border-radius:var(--r);
+    padding:15px;color:var(--ink);font-size:14px;font-weight:400;
+    text-transform:none;letter-spacing:0;opacity:1;margin:0;
+  }
+  .checks input[type=checkbox],.optin input[type=checkbox]{
     appearance:none;-webkit-appearance:none;
     width:18px;height:18px;flex-shrink:0;margin:0;position:relative;
     border:2px solid var(--ink);border-radius:var(--r);
     background:var(--white);cursor:pointer;
   }
-  .checks input[type=checkbox]:checked{background:var(--gold)}
-  .checks input[type=checkbox]:checked::after{
+  .checks input[type=checkbox]:checked,.optin input[type=checkbox]:checked{background:var(--gold)}
+  .checks input[type=checkbox]:checked::after,.optin input[type=checkbox]:checked::after{
     content:"";position:absolute;left:4px;top:0;
     width:5px;height:10px;border:solid var(--ink);
     border-width:0 2.5px 2.5px 0;transform:rotate(45deg);
@@ -220,6 +236,7 @@
   .modal-mark{width:64px;height:64px;margin:0 auto 18px}
   .modal-card h2{font-size:27px;font-weight:600;letter-spacing:.02em;margin-bottom:10px}
   .modal-card p{font-size:15px;opacity:.78;margin-bottom:26px}
+  .modal-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .modal-x{
     position:absolute;top:9px;right:9px;width:30px;height:30px;
     display:flex;align-items:center;justify-content:center;
@@ -237,7 +254,7 @@
   footer{background:var(--cream);border-top:2px solid var(--ink);padding:56px 0}
   .frow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;font-size:13px}
   .fb{font-weight:600;text-transform:uppercase;font-size:15px;display:flex;align-items:center;gap:9px;letter-spacing:.04em}
-  .fb img{width:28px;height:28px;border:1.5px solid var(--ink);border-radius:var(--r);background:var(--white)}
+  .fb img{width:44px;height:44px;border:1.5px solid var(--ink);border-radius:var(--r);background:var(--white)}
   .flinks{display:flex;gap:22px}
   .flinks a{opacity:.75}
   .flinks a:hover{opacity:1}
@@ -460,6 +477,38 @@
   </div>
 </section>
 
+<section id="boletin" class="tight">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-en="Newsletter">Boletín</p>
+      <h2 class="h-lg" data-en="What we're up to">Qué estamos armando</h2>
+      <p data-en="Events, dates, and the occasional thing we managed to bring back to life.">Eventos, fechas, y alguna que otra cosa que logramos revivir.</p>
+    </div>
+    <div class="empty-card">
+      <svg class="empty-illo" viewBox="0 0 260 200" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <ellipse cx="130" cy="184" rx="82" ry="7" fill="#f0e6d4"/>
+        <path d="M42 162h176" stroke="#141210" stroke-width="3"/>
+        <path d="M64 162v20M196 162v20" stroke="#141210" stroke-width="3"/>
+        <path d="M84 162V110h92v52" stroke="#141210" stroke-width="3"/>
+        <path d="M84 110l46-32 46 32" stroke="#141210" stroke-width="3"/>
+        <path d="M84 110l46 30 46-30" stroke="#141210" stroke-width="2" opacity=".3"/>
+        <path d="M112 162c6-12 0-18 8-26s6-14 2-20" stroke="#e5b415" stroke-width="3"/>
+        <path d="M186 84l-22 22" stroke="#141210" stroke-width="3"/>
+        <path d="M190 80l14-14" stroke="#b5482a" stroke-width="8"/>
+        <path d="M160 100v-8M156 96h8" stroke="#e5b415" stroke-width="2.5"/>
+        <circle cx="62" cy="152" r="5" stroke="#b5482a" stroke-width="2.5"/>
+        <path d="M59 152h6" stroke="#b5482a" stroke-width="2"/>
+        <circle cx="78" cy="157" r="3.5" stroke="#b5482a" stroke-width="2.5"/>
+        <path d="M226 96c8 6 8 18 0 24M238 88c14 12 14 32 0 44" stroke="#2b6f68" stroke-width="2.5"/>
+        <path d="M34 96c-8 6-8 18 0 24M22 88C8 100 8 120 22 132" stroke="#2b6f68" stroke-width="2.5"/>
+      </svg>
+      <h3 data-en="This one's still on the repair table.">Esto todavía está en la mesa de reparación.</h3>
+      <p data-en="Nothing published yet — we're busy fixing other things first. Sign up and we'll let you know the moment the first issue is back in one piece.">Todavía no publicamos nada — estamos ocupados arreglando otras cosas primero. Regístrate y te avisamos apenas el primero esté entero.</p>
+      <a href="#voluntarios" class="btn btn-gold" data-en="Sign me up →">Quiero que me avisen →</a>
+    </div>
+  </div>
+</section>
+
 <div class="seam" aria-hidden="true">
   <svg viewBox="0 0 1200 36" preserveAspectRatio="none">
     <!-- Everything below the wave is filled ink, so the wave itself IS the
@@ -531,6 +580,15 @@
         </div>
       </div>
       <div class="full">
+        <!-- Hidden field carries the value so the inbox always shows an
+             explicit Sí/No; an unchecked box would otherwise send nothing. -->
+        <input type="hidden" name="boletin" id="boletinField" value="Sí">
+        <label class="optin">
+          <input type="checkbox" id="boletinCb" checked>
+          <span data-en="Yes, send me the newsletter — events, dates, and what we're fixing.">Sí, mándame el boletín — eventos, fechas, y lo que estamos arreglando.</span>
+        </label>
+      </div>
+      <div class="full">
         <label for="exp" data-en="Tell us about your experience (optional)">Cuéntanos tu experiencia (opcional)</label>
         <textarea id="exp" name="experiencia" placeholder="¿Qué sabes reparar? ¿Lo haces por trabajo, hobby, o ambos?" data-en-ph="What can you repair? Is it work, a hobby, or both?"></textarea>
       </div>
@@ -568,7 +626,10 @@
     </svg>
     <h2 id="okTitle" data-en="Thanks!">¡Gracias!</h2>
     <p id="okBody" data-en="We got your sign-up and we'll be in touch before the next event.">Recibimos tu registro y te contactaremos antes del próximo evento.</p>
-    <button type="button" class="btn btn-gold" data-close data-en="Close">Cerrar</button>
+    <div class="modal-actions">
+      <a href="#boletin" class="btn btn-gold" id="okToNews" data-en="See what we're up to →">Mira qué estamos armando →</a>
+      <button type="button" class="btn" data-close data-en="Close">Cerrar</button>
+    </div>
   </div>
 </div>
 
@@ -749,15 +810,32 @@
       raf=null; clear();
       document.body.style.overflow='';
       document.removeEventListener('keydown',onKey);
-      if(lastFocus&&lastFocus.focus)lastFocus.focus();
+      /* preventScroll: restoring focus to the submit button would otherwise
+         scroll the page back to the form and fight the newsletter jump. */
+      if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
     }
     modal.querySelectorAll('[data-close]').forEach(function(el){
       el.addEventListener('click',close);
     });
+    /* A real anchor, so the jump works off native navigation (plus the
+       stylesheet's smooth scroll-behavior) rather than relying on JS. The
+       handler only dismisses the dialog. */
+    var toNews=document.getElementById('okToNews');
+    if(toNews)toNews.addEventListener('click',function(){close()});
     return {open:open,close:close};
   })();
 
   var f=document.getElementById('vf');
+  /* Mirror the newsletter checkbox into its hidden field, so submissions
+     always carry an explicit Sí/No rather than omitting the field. */
+  (function(){
+    var cb=document.getElementById('boletinCb'),hid=document.getElementById('boletinField');
+    if(!cb||!hid)return;
+    function sync(){hid.value=cb.checked?'Sí':'No'}
+    cb.addEventListener('change',sync);
+    f.addEventListener('reset',function(){setTimeout(sync,0)});
+    sync();
+  })();
   var n=document.getElementById('name'),e=document.getElementById('email');
   var en=document.getElementById('errName'),ee=document.getElementById('errEmail'),es=document.getElementById('errSend');
   var btn=f.querySelector('button[type=submit]');
