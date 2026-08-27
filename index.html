@@ -95,9 +95,12 @@
 
   /* MARQUEE */
   .marquee{background:var(--gold);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);overflow:hidden;padding:14px 0;margin-top:64px}
+  /* Scrolls by exactly one group width (--mw, set by script) so the loop is
+     seamless. Script clones .mgroup until the track outruns the viewport. */
   .mtrack{display:flex;width:max-content;animation:sc 26s linear infinite}
-  .mtrack span{font-size:16px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;padding:0 26px;white-space:nowrap}
-  @keyframes sc{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .mgroup{display:flex;flex-shrink:0}
+  .mgroup span{font-size:16px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;padding:0 26px;white-space:nowrap}
+  @keyframes sc{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--mw,50%)))}}
   @media(prefers-reduced-motion:reduce){.mtrack{animation:none}}
 
   section{padding:80px 0}
@@ -243,8 +246,10 @@
 
 <div class="marquee">
   <div class="mtrack">
-    <span>Trae lo roto</span><span>◆</span><span>Lo arreglamos juntos</span><span>◆</span><span>Miami</span><span>◆</span><span>Reparar es resistir</span><span>◆</span>
-    <span>Trae lo roto</span><span>◆</span><span>Lo arreglamos juntos</span><span>◆</span><span>Miami</span><span>◆</span><span>Reparar es resistir</span><span>◆</span>
+    <!-- Edit the phrases here only — the script repeats this group to fill the screen. -->
+    <div class="mgroup">
+      <span>Trae lo roto</span><span>◆</span><span>Lo arreglamos juntos</span><span>◆</span><span>Miami</span><span>◆</span><span>Reparar es resistir</span><span>◆</span>
+    </div>
   </div>
 </div>
 
@@ -384,8 +389,8 @@
 <div class="seam">
   <svg viewBox="0 0 1200 36" preserveAspectRatio="none">
     <rect width="1200" height="36" fill="#fff6eb"/>
-    <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6" fill="none" stroke="#141210" stroke-width="10"/>
-    <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6" fill="none" stroke="#e5b415" stroke-width="4"/>
+    <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7" fill="none" stroke="#141210" stroke-width="10"/>
+    <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7" fill="none" stroke="#e5b415" stroke-width="4"/>
   </svg>
 </div>
 
@@ -456,6 +461,41 @@
 </footer>
 
 <script>
+  /* Marquee: repeat the phrase group until the track is at least one group
+     wider than the viewport, then scroll by exactly one group width. Without
+     this the loop leaves a gap on the right and visibly snaps back. */
+  (function(){
+    var track=document.querySelector('.mtrack');
+    if(!track)return;
+    var group=track.querySelector('.mgroup');
+    if(!group)return;
+    function fill(){
+      while(track.children.length>1)track.removeChild(track.lastChild);
+      var w=group.getBoundingClientRect().width;
+      if(!w)return;
+      track.style.setProperty('--mw',w+'px');
+      var need=Math.ceil(window.innerWidth/w)+1;
+      for(var i=1;i<need;i++){
+        var c=group.cloneNode(true);
+        c.setAttribute('aria-hidden','true');
+        track.appendChild(c);
+      }
+    }
+    fill();
+    var last=window.innerWidth;
+    function recheck(){
+      if(window.innerWidth===last)return;
+      last=window.innerWidth;
+      fill();
+    }
+    if(window.ResizeObserver){
+      new ResizeObserver(recheck).observe(document.querySelector('.marquee'));
+    }
+    var t;
+    window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(recheck,150)});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fill);
+  })();
+
   var f=document.getElementById('vf'),ok=document.getElementById('ok');
   var n=document.getElementById('name'),e=document.getElementById('email');
   var en=document.getElementById('errName'),ee=document.getElementById('errEmail'),es=document.getElementById('errSend');
