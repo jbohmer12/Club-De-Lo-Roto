@@ -58,6 +58,11 @@
   .navlinks{display:flex;gap:24px;font-size:12px;font-weight:500;text-transform:uppercase}
   .navlinks a{padding-bottom:3px;border-bottom:2px solid transparent}
   .navlinks a:hover,.navlinks a.is-current{border-color:var(--gold)}
+  .navlink-icon{
+    font-size:18px;padding:6px;line-height:1;text-decoration:none;color:var(--ink);
+    display:flex;align-items:center;
+  }
+  .navlink-icon:hover{color:var(--gold-deep)}
   /* Interior pages open straight into content, with no hero to space them. */
   .page-top{padding:76px 0 64px}
   .navright{display:flex;align-items:center;gap:12px}
@@ -262,6 +267,26 @@
   }
 
   footer{background:var(--cream);border-top:2px solid var(--ink);padding:56px 0}
+  /* Offsets the sticky nav so the anchor target is not hidden beneath it. */
+  #newsletter{scroll-margin-top:100px}
+  .foot-nl{padding-bottom:32px;margin-bottom:32px;border-bottom:2px solid var(--ink)}
+  .foot-nl-inner{display:flex;gap:28px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+  .foot-nl-title{font-size:22px;font-weight:600;letter-spacing:.02em;margin-top:8px}
+  .foot-nl-form{flex:1;min-width:min(100%,360px);max-width:440px}
+  .foot-nl-row{display:flex;gap:12px}
+  /* [type=email] to outrank the generic input rule further down the file. */
+  .foot-nl-row input[type=email]{
+    flex:1;min-width:0;background:var(--white);border:2px solid var(--ink);color:var(--ink);
+    padding:11px 14px;border-radius:var(--r);font-family:inherit;font-size:14px;
+  }
+  .foot-nl-row input[type=email]:focus{outline:none;border-color:var(--gold-deep)}
+  .foot-nl-row .btn{white-space:nowrap}
+  .foot-nl .err{color:var(--rust);margin-top:10px}
+  .foot-nl-ok{margin-top:12px;font-size:14px;font-weight:600}
+  @media(max-width:640px){
+    .foot-nl-row{flex-direction:column}
+    .foot-nl-row .btn{align-self:flex-start}
+  }
   .frow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;font-size:13px}
   .fb{font-weight:600;text-transform:uppercase;font-size:15px;display:flex;align-items:center;gap:9px;letter-spacing:.04em}
   .fb img{height:44px;width:auto}
@@ -273,7 +298,9 @@
   /* Five nav links leave no slack at mid widths — tighten the gaps rather
      than let the brand and links collide. */
   @media(max-width:1120px){
-    .navlinks{gap:15px}
+    .navlinks{gap:11px}
+    .navright{gap:8px}
+    .navlink-icon{padding:6px 2px}
     .brand b{font-size:14px}
   }
   @media(max-width:520px){

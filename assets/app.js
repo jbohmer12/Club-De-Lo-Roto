@@ -236,26 +236,46 @@
   });
 }
 
-  /* Newsletter sign-up (boletin.html): email only, reusing the shared
-     success dialog. Kept separate from the volunteer form above, which
-     expects fields this page does not have. */
-  var nf=document.getElementById('nf');
-  if(nf){
-    var ne=document.getElementById('nlEmail');
-    var nee=document.getElementById('nlErrEmail'),nes=document.getElementById('nlErrSend');
-    var nbtn=nf.querySelector('button[type=submit]');
-    ne.addEventListener('input',function(){nee.style.display='none'});
-    nf.addEventListener('submit',function(ev){
+  /* Newsletter sign-ups: email only, entirely separate from the volunteer
+     form above, which expects fields these do not have. Two placements use
+     it — the newsletter page and the footer — so the wiring is shared and
+     each supplies its own success behaviour. */
+  function wireNewsletter(ids,onSuccess){
+    var form=document.getElementById(ids.form);
+    if(!form)return;
+    var email=document.getElementById(ids.email);
+    var errEmail=document.getElementById(ids.errEmail);
+    var errSend=document.getElementById(ids.errSend);
+    var btn=form.querySelector('button[type=submit]');
+    if(!email||!errEmail||!errSend||!btn)return;
+    email.addEventListener('input',function(){errEmail.style.display='none'});
+    form.addEventListener('submit',function(ev){
       ev.preventDefault();
-      nes.style.display='none';
-      if(!/^\S+@\S+\.\S+$/.test(ne.value.trim())){nee.style.display='block';return}
-      nbtn.disabled=true;
-      fetch(nf.action,{method:'POST',body:new FormData(nf),headers:{'Accept':'application/json'}})
+      errSend.style.display='none';
+      if(!/^\S+@\S+\.\S+$/.test(email.value.trim())){errEmail.style.display='block';return}
+      btn.disabled=true;
+      fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
         .then(function(res){
-          if(res.ok){nf.reset();okModal.open();}
-          else{nes.style.display='block'}
+          if(res.ok){form.reset();onSuccess();}
+          else{errSend.style.display='block'}
         })
-        .catch(function(){nes.style.display='block'})
-        .finally(function(){nbtn.disabled=false});
+        .catch(function(){errSend.style.display='block'})
+        .finally(function(){btn.disabled=false});
     });
   }
+
+  /* Newsletter page: celebrate with the shared dialog. */
+  wireNewsletter(
+    {form:'nf',email:'nlEmail',errEmail:'nlErrEmail',errSend:'nlErrSend'},
+    function(){okModal.open()}
+  );
+
+  /* Footer: inline confirmation instead of the dialog, whose copy is written
+     for the volunteer sign-up on this page. */
+  wireNewsletter(
+    {form:'fnf',email:'fnlEmail',errEmail:'fnlErrEmail',errSend:'fnlErrSend'},
+    function(){
+      var ok=document.getElementById('fnlOk');
+      if(ok)ok.hidden=false;
+    }
+  );
