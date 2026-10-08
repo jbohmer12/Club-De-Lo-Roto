@@ -184,11 +184,6 @@
     modal.querySelectorAll('[data-close]').forEach(function(el){
       el.addEventListener('click',close);
     });
-    /* A real anchor, so the jump works off native navigation (plus the
-       stylesheet's smooth scroll-behavior) rather than relying on JS. The
-       handler only dismisses the dialog. */
-    var toNews=document.getElementById('okToNews');
-    if(toNews)toNews.addEventListener('click',function(){close()});
     return {open:open,close:close};
   })();
 
@@ -208,15 +203,20 @@
   var n=document.getElementById('name'),e=document.getElementById('email');
   var en=document.getElementById('errName'),ee=document.getElementById('errEmail'),es=document.getElementById('errSend');
   var btn=f.querySelector('button[type=submit]');
-  n.addEventListener('input',function(){en.style.display='none'});
-  e.addEventListener('input',function(){ee.style.display='none'});
+  /* Show/hide a field's error and flag the field for screen readers. */
+  function mark(input,err,bad){
+    err.style.display=bad?'block':'none';
+    if(bad)input.setAttribute('aria-invalid','true');else input.removeAttribute('aria-invalid');
+  }
+  n.addEventListener('input',function(){mark(n,en,false)});
+  e.addEventListener('input',function(){mark(e,ee,false)});
   f.addEventListener('submit',function(ev){
     ev.preventDefault();
-    var bad=false;
     es.style.display='none';
-    if(!n.value.trim()){en.style.display='block';bad=true}
-    if(!/^\S+@\S+\.\S+$/.test(e.value.trim())){ee.style.display='block';bad=true}
-    if(bad)return;
+    var badName=!n.value.trim(), badEmail=!/^\S+@\S+\.\S+$/.test(e.value.trim());
+    mark(n,en,badName); mark(e,ee,badEmail);
+    if(badName){n.focus();return}
+    if(badEmail){e.focus();return}
     btn.disabled=true;
     fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
       .then(function(res){
@@ -248,11 +248,13 @@
     var errSend=document.getElementById(ids.errSend);
     var btn=form.querySelector('button[type=submit]');
     if(!email||!errEmail||!errSend||!btn)return;
-    email.addEventListener('input',function(){errEmail.style.display='none'});
+    email.addEventListener('input',function(){errEmail.style.display='none';email.removeAttribute('aria-invalid')});
     form.addEventListener('submit',function(ev){
       ev.preventDefault();
       errSend.style.display='none';
-      if(!/^\S+@\S+\.\S+$/.test(email.value.trim())){errEmail.style.display='block';return}
+      if(!/^\S+@\S+\.\S+$/.test(email.value.trim())){
+        errEmail.style.display='block';email.setAttribute('aria-invalid','true');email.focus();return;
+      }
       btn.disabled=true;
       fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
         .then(function(res){

@@ -2,19 +2,42 @@
 <html lang="es" data-title-es="Club de lo Roto — Reparación comunitaria en Miami" data-title-en="Club de lo Roto — Community repair in Miami">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Club de lo Roto — Reparación comunitaria en Miami</title>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=3">
+<meta name="description" content="Club de lo Roto is a community repair event series in Miami: bring what's broken, sit down with a volunteer, and fix it together. We're looking for volunteer fixers.">
+<link rel="canonical" href="https://clubdeloroto.com/">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Club de lo Roto">
+<meta property="og:url" content="https://clubdeloroto.com/">
+<meta property="og:title" content="Club de lo Roto — Community repair in Miami">
+<meta property="og:description" content="Bring what's broken. We sit down. We fix it. Join as a volunteer fixer.">
+<meta property="og:image" content="https://clubdeloroto.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Club de lo Roto logo — black hand-lettering on a gold circle — with the line: Bring what's broken. We sit down. We fix it.">
+<meta property="og:locale" content="es_US">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Club de lo Roto — Community repair in Miami">
+<meta name="twitter:description" content="Bring what's broken. We sit down. We fix it. Join as a volunteer fixer.">
+<meta name="twitter:image" content="https://clubdeloroto.com/assets/og-image.png">
+
+<link rel="icon" href="assets/logo-circle.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/plex-mono-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/plex-mono-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/styles.css?v=4">
 </head>
 <body>
+<a class="skip" href="#main" data-en="Skip to content">Saltar al contenido</a>
 
-<nav>
+<nav aria-label="Principal" data-en-aria="Main">
   <div class="wrap row">
-    <div class="brand"><img src="assets/logo-mark.svg" alt="Club de lo Roto"><b>Club de lo Roto</b></div>
+    <a class="brand" href="./"><img src="assets/logo-mark.svg" width="45" height="46" alt="Club de lo Roto"></a>
     <div class="navlinks">
       <a href="#idea" data-en="The idea">La idea</a>
       <a href="#estaciones" data-en="Stations">Estaciones</a>
@@ -23,58 +46,34 @@
       <a href="boletin.html" data-en="Newsletter">Boletín</a>
     </div>
     <div class="navright">
-      <a href="#newsletter" class="navlink-icon" aria-label="Newsletter">✉</a>
       <div class="langsw" role="group" aria-label="Idioma / Language">
-        <button type="button" data-lang="es" aria-pressed="true">ES</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="es" aria-pressed="true" lang="es" aria-label="Español">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
       </div>
       <a href="#voluntarios" class="btn btn-gold btn-nav" data-en="Volunteer">Sé voluntario</a>
     </div>
   </div>
 </nav>
 
+<main id="main">
 <header class="hero">
   <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow" data-en="Miami · Community repair events">Miami · Eventos comunitarios de reparación</p>
-      <h1 class="h-xl" style="margin-top:16px" data-en-html="Bring what's broken.<br>We sit down.<br>We fix it.">Trae lo roto.<br>Nos sentamos.<br>Lo arreglamos.</h1>
-      <p class="sub" data-en="A community event where people bring broken things — electronics, furniture, bikes, clothes — and sit down with a volunteer to try to fix them together, instead of throwing them out.">Un evento comunitario donde la gente trae objetos rotos — electrónica, muebles, bicicletas, ropa — y se sienta con un voluntario para intentar repararlos juntos, en vez de tirarlos.</p>
-      <div class="btnrow">
-        <a href="#voluntarios" class="btn btn-gold" data-en="I want to volunteer →">Quiero ser voluntario →</a>
-        <a href="https://instagram.com/clubdeloroto" class="btn">Instagram</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><div class="n">5</div><div class="l" data-en="Stations">Estaciones</div></div>
-        <div class="stat"><div class="n">$0</div><div class="l" data-en="To get in">Cuesta entrar</div></div>
-        <div class="stat"><div class="n">Miami</div><div class="l" data-en="Where we start">Donde empezamos</div></div>
-      </div>
+    <div class="hero-mark">
+      <img src="assets/logo-circle.svg" width="420" height="419" alt="Club de lo Roto" fetchpriority="high">
     </div>
-    <div class="logo-stage">
-      <div class="logo-frame">
-        <span class="badge" data-en="New in Miami">Nuevo en Miami</span>
-
-        <svg class="doodle doodle-stitch" viewBox="0 0 74 34" fill="none">
-          <path d="M4 26c5-9 10-13 15-13M4 26l7-3M4 26l4 6M25 20c3-8 8-12 13-12M25 20l7-2M25 20l3 6M46 15c3-7 8-11 13-11M46 15l7-1M46 15l2 6M65 10l4-2" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-
-        <svg class="doodle doodle-spark" viewBox="0 0 56 44" fill="none">
-          <path d="M14 8v11M8.5 13.5h11" stroke="#e5b415" stroke-width="3" stroke-linecap="round"/>
-          <path d="M40 22c2 8 1 14-4 20M40 22c6 1 11 4 14 10M40 22c-5-3-10-4-16-3" stroke="#b5482a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="40" cy="22" r="2.3" fill="#141210"/>
-        </svg>
-
-        <svg class="doodle doodle-thread" viewBox="0 0 52 60" fill="none">
-          <path d="M26 4c11 0 18 6 18 13s-8 11-16 11-13-4-13-9 6-8 12-8 10 3 10 7-4 6-8 6" stroke="#2b6f68" stroke-width="2.2" stroke-linecap="round"/>
-          <circle cx="26" cy="4" r="3" fill="#2b6f68"/>
-        </svg>
-
-        <img src="assets/logo.svg" alt="Logo de Club de lo Roto">
+    <div class="hero-copy">
+      <p class="eyebrow" data-en="Miami · Community repair">Miami · Reparación comunitaria</p>
+      <h1 class="h-xl" data-en-html="Bring what's broken.<br>We sit down.<br>We fix it.">Trae lo roto.<br>Nos sentamos.<br>Lo arreglamos.</h1>
+      <p class="lead" data-en="A community event where people bring broken things — electronics, furniture, bikes, clothes — and sit down with a volunteer to fix them together, instead of throwing them out.">Un evento comunitario donde la gente trae objetos rotos — electrónica, muebles, bicicletas, ropa — y se sienta con un voluntario a repararlos juntos, en vez de tirarlos.</p>
+      <div class="hero-cta">
+        <a href="#voluntarios" class="btn btn-gold" data-en="I want to volunteer →">Quiero ser voluntario →</a>
+        <a href="https://www.instagram.com/clubdeloroto/" class="textlink" data-en="Follow on Instagram">Síguenos en Instagram</a>
       </div>
     </div>
   </div>
 </header>
 
-<div class="marquee">
+<div class="marquee" aria-hidden="true">
   <div class="mtrack">
     <!-- Edit the phrases here only — the script repeats this group to fill the screen. -->
     <div class="mgroup">
@@ -84,134 +83,69 @@
 </div>
 
 <section id="idea">
-  <div class="wrap split">
+  <div class="wrap idea">
     <div>
       <p class="eyebrow" data-en="The idea">La idea</p>
-      <h2 class="h-lg" style="margin-top:12px" data-en-html="Repair in community,<br>not in solitude">Reparar en comunidad,<br>no en soledad</h2>
-      <p data-en="Most of what we throw away can still be saved. Club de lo Roto brings together people with tools and know-how — electricians, carpenters, seamstresses, bike mechanics — and neighbours who just need a hand and a table to sit down and try.">La mayoría de las cosas que tiramos todavía se pueden salvar. Club de lo Roto junta a gente con herramientas y conocimiento — electricistas, carpinteros, costureras, mecánicos de bici — con vecinos que solo necesitan una mano y una mesa donde sentarse a intentarlo.</p>
-      <p data-en="We don't promise everything gets fixed. We promise you'll learn something, meet someone, and leave less behind in the dumpster.">No prometemos que todo se arregle. Prometemos que vas a aprender algo, conocer a alguien, y dejar menos cosas en el basurero.</p>
+      <h2 class="h-lg" style="margin-top:16px" data-en="Repair in community, not alone">Reparar en comunidad, no en soledad</h2>
     </div>
-    <div class="illo-card">
-      <svg viewBox="0 0 260 220" width="100%" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <ellipse cx="130" cy="196" rx="88" ry="7" fill="#f0e6d4"/>
-        <path d="M52 196V112c0-7 5-12 12-12h132c7 0 12 5 12 12v84" stroke="#141210" stroke-width="3"/>
-        <path d="M40 100h180" stroke="#141210" stroke-width="3"/>
-        <path d="M96 100V72c0-9 8-16 17-16h34c9 0 17 7 17 16v28" stroke="#141210" stroke-width="3"/>
-        <path d="M130 56V40" stroke="#141210" stroke-width="3"/>
-        <circle cx="130" cy="33" r="8" stroke="#141210" stroke-width="3"/>
-        <path d="M113 78c6 8 12 14 20 18M139 74c-4 10-9 16-16 22" stroke="#b98d0f" stroke-width="3"/>
-        <path d="M78 128l14 16-14 14" stroke="#b5482a" stroke-width="3"/>
-        <path d="M182 128l-14 16 14 14" stroke="#b5482a" stroke-width="3"/>
-        <path d="M108 140h44M108 158h30" stroke="#141210" stroke-width="3"/>
-        <path d="M232 60c8 6 8 18 0 24M244 52c14 12 14 32 0 44" stroke="#2b6f68" stroke-width="2.5"/>
-        <path d="M28 60c-8 6-8 18 0 24M16 52C2 64 2 84 16 96" stroke="#2b6f68" stroke-width="2.5"/>
-      </svg>
+    <div class="body">
+      <p data-en="Most of what we throw away can still be saved. Club de lo Roto brings together people with tools and know-how — electricians, carpenters, seamstresses, bike mechanics — and neighbors who just need a hand and a table to sit down and try.">La mayoría de las cosas que tiramos todavía se pueden salvar. Club de lo Roto junta a gente con herramientas y conocimiento — electricistas, carpinteros, costureras, mecánicos de bici — con vecinos que solo necesitan una mano y una mesa donde sentarse a intentarlo.</p>
+      <p data-en="We don't promise everything gets fixed. We promise you'll learn something, meet someone, and leave less behind in the dumpster.">No prometemos que todo se arregle. Prometemos que vas a aprender algo, conocer a alguien y dejar menos cosas en el basurero.</p>
     </div>
   </div>
 </section>
 
-<section id="estaciones" class="tight">
+<section id="estaciones" style="padding-top:0">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow" data-en="Stations">Estaciones</p>
-      <h2 class="h-lg" data-en="Where we need volunteers">Dónde hacemos falta voluntarios</h2>
-      <p data-en="Each event is organised by category. You don't need to cover them all — knowing one is enough to help.">Cada evento se organiza por categoría. No necesitas cubrirlas todas — con que sepas de una, nos ayudas.</p>
+      <h2 class="h-lg" data-en="Where we need volunteers">Dónde nos hacen falta voluntarios</h2>
+      <p data-en="Each event is organized by category. You don't need to cover them all — knowing one is enough to help.">Cada evento se organiza por categoría. No necesitas cubrirlas todas — con que sepas de una, ya ayudas.</p>
     </div>
-    <div class="stations">
-      <div class="card">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="10" y="16" width="28" height="22" rx="2"/>
-          <path d="M18 16v-5a6 6 0 0112 0v5" stroke="#b98d0f"/>
-          <path d="M24 22v5l-4 4h8" stroke="#b5482a"/>
-        </svg>
-        <h3 data-en="Electronics">Electrónica</h3>
-        <p data-en="Lamps, blenders, fans, cables, chargers.">Lámparas, licuadoras, ventiladores, cables, cargadores.</p>
-        <span class="tag" data-en="Most requested">Más pedida</span>
-      </div>
-      <div class="card">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 38V20M36 38V20"/><path d="M8 20h32"/>
-          <path d="M16 20v-8a4 4 0 014-4h8a4 4 0 014 4v8" stroke="#b98d0f"/>
-          <path d="M20 27l4 5 4-5" stroke="#b5482a"/>
-        </svg>
-        <h3 data-en="Furniture">Muebles</h3>
-        <p data-en="Chairs, tables, drawers, loose joints.">Sillas, mesas, cajones, ensambles sueltos.</p>
-        <span class="tag" data-en="Wood">Madera</span>
-      </div>
-      <div class="card">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="13" cy="31" r="8"/><circle cx="35" cy="31" r="8"/>
-          <path d="M13 31l8-14h9l5 14" stroke="#b98d0f"/><path d="M19 17h8"/>
-        </svg>
-        <h3 data-en="Bicycles">Bicicletas</h3>
-        <p data-en="Brakes, chains, tyres, general tune-ups.">Frenos, cadenas, llantas, ajustes generales.</p>
-        <span class="tag" data-en="Wheels">Ruedas</span>
-      </div>
-      <div class="card">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 12l8 6 8-6 8 6-4 6v18H12V24l-4-6z"/>
-          <path d="M20 28c3 3 5 3 8 0s5-3 8 0" stroke="#b5482a"/>
-          <circle cx="24" cy="18" r="1.6" stroke="#b98d0f"/>
-        </svg>
-        <h3 data-en="Clothing & textiles">Ropa y textiles</h3>
-        <p data-en="Seams, zips, hems, patches.">Costuras, cierres, dobladillos, remiendos.</p>
-        <span class="tag" data-en="Fabric">Tela</span>
-      </div>
-      <div class="card">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M30 12a8 8 0 00-10 10L10 32a4 4 0 006 6l10-10a8 8 0 0010-10l-5 5-5-1-1-5z" stroke="#b98d0f"/>
-          <path d="M15 33l2 2" stroke="#b5482a"/>
-        </svg>
-        <h3 data-en="General">General</h3>
-        <p data-en="Handy hands, ideas, and the will to help wherever it's needed.">Manitas, ideas, y ganas de ayudar donde se necesite.</p>
-        <span class="tag" data-en="Everything else">Todo lo demás</span>
-      </div>
-    </div>
+    <ul class="stations">
+      <li class="card"><h3 data-en="Electronics">Electrónica</h3><p data-en="Lamps, blenders, fans, cables, chargers.">Lámparas, licuadoras, ventiladores, cables, cargadores.</p></li>
+      <li class="card"><h3 data-en="Furniture">Muebles</h3><p data-en="Chairs, tables, drawers, loose joints.">Sillas, mesas, cajones, ensambles sueltos.</p></li>
+      <li class="card"><h3 data-en="Bikes">Bicicletas</h3><p data-en="Brakes, chains, tires, tune-ups.">Frenos, cadenas, llantas, ajustes.</p></li>
+      <li class="card"><h3 data-en="Clothing &amp; textiles">Ropa y textiles</h3><p data-en="Seams, zippers, hems, patches.">Costuras, cierres, dobladillos, remiendos.</p></li>
+      <li class="card"><h3 data-en="General">General</h3><p data-en="Handy hands, ideas, and the will to help wherever it's needed.">Manitas, ideas y ganas de ayudar donde se necesite.</p></li>
+    </ul>
   </div>
 </section>
 
-<section id="como">
+<section id="como" style="padding-top:0">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow" data-en="How it works">Cómo funciona</p>
       <h2 class="h-lg" data-en="Volunteering, step by step">Ser voluntario, paso a paso</h2>
     </div>
-    <div class="steps">
-      <svg class="steps-link" viewBox="0 0 1200 40" preserveAspectRatio="none" fill="none">
-        <path d="M180 20c60-14 130-14 210 0s150 14 210 0 150-14 210 0 150 14 210 0" stroke="#141210" stroke-width="2" stroke-dasharray="1 11" stroke-linecap="round" opacity=".35"/>
-      </svg>
-      <div class="step"><span class="num">1</span><h3 data-en="You fill out the form">Llenas el formulario</h3><p data-en="Tell us what you know how to do and when you're free. Takes two minutes.">Nos dices qué sabes hacer y cuándo tienes tiempo libre. Toma dos minutos.</p></div>
-      <div class="step"><span class="num">2</span><h3 data-en="We get in touch">Te contactamos</h3><p data-en="We'll write before the next event to confirm your station and time.">Te escribimos antes del próximo evento para confirmar tu estación y la hora.</p></div>
-      <div class="step"><span class="num">3</span><h3 data-en="We repair together">Reparamos juntos</h3><p data-en="You arrive, settle in at your table, and help someone save something they care about.">Llegas, te instalas en tu mesa, y ayudas a alguien a salvar algo que quiere.</p></div>
-    </div>
+    <ol class="steps">
+      <li class="card"><span class="num" aria-hidden="true">1</span><h3 data-en="Fill out the form">Llenas el formulario</h3><p data-en="Tell us what you know how to fix and when you're free. It takes two minutes.">Nos dices qué sabes arreglar y cuándo tienes tiempo. Toma dos minutos.</p></li>
+      <li class="card"><span class="num" aria-hidden="true">2</span><h3 data-en="We get in touch">Te contactamos</h3><p data-en="Before the next event, we'll write to confirm your station and time.">Antes del próximo evento te escribimos para confirmar tu estación y la hora.</p></li>
+      <li class="card"><span class="num" aria-hidden="true">3</span><h3 data-en="We fix things together">Reparamos juntos</h3><p data-en="You show up, settle in at your table, and help someone save something they care about.">Llegas, te instalas en tu mesa y ayudas a alguien a salvar algo que quiere.</p></li>
+    </ol>
   </div>
 </section>
 
-<section class="tight">
-  <div class="wrap" style="display:flex;justify-content:center">
-    <div class="manifesto">
-      <span class="qm">"</span>
-      <p data-en="Every broken object has a story. We don't throw it away — we keep writing it, with whoever knows how to continue it.">Cada objeto roto tiene una historia. Nosotros no la tiramos — la seguimos escribiendo, con quien la sepa continuar.</p>
-      <p class="at">Club de lo Roto · Miami, FL</p>
-      <svg class="doodle doodle-crack" viewBox="0 0 64 30" fill="none">
-        <path d="M2 4c8 3 10 8 6 12s-2 8 5 8 8 4 3 6" stroke="#141210" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M2 4c8 3 10 8 6 12s-2 8 5 8 8 4 3 6" stroke="#fff6eb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.5 3.5"/>
-      </svg>
-    </div>
+<section style="padding-top:0">
+  <div class="wrap">
+    <blockquote class="manifesto">
+      <p data-en="Every broken object has a story. We don't throw it away — we keep writing it, with whoever knows how to continue it.">Cada objeto roto tiene una historia. No la tiramos — la seguimos escribiendo, con quien la sepa continuar.</p>
+      <footer>Club de lo Roto · Miami, FL</footer>
+    </blockquote>
   </div>
 </section>
 
-<section id="faq" class="tight">
+<section id="faq" style="padding-top:0">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow" data-en="FAQ">Preguntas</p>
       <h2 class="h-lg" data-en="Before you sign up">Antes de registrarte</h2>
     </div>
     <div class="faq">
-      <div class="qa"><h3 data-en="Do I have to be a professional?">¿Tengo que ser profesional?</h3><p data-en="No. If you fix things at home as a hobby, you already know enough to help at a table.">No. Si arreglas cosas en tu casa por hobby, ya sabes suficiente para ayudar en una mesa.</p></div>
-      <div class="qa"><h3 data-en="Do I need to bring tools?">¿Tengo que llevar herramientas?</h3><p data-en="If you have your own, even better. If not, we'll sort out the basics before the event.">Si tienes las tuyas, mejor. Si no, coordinamos lo básico antes del evento.</p></div>
-      <div class="qa"><h3 data-en="How long is an event?">¿Cuánto dura un evento?</h3><p data-en="About three or four hours, on a weekend. You don't have to stay the whole time.">Unas tres o cuatro horas, un fin de semana. No tienes que quedarte todo el tiempo.</p></div>
-      <div class="qa"><h3 data-en="Is there any cost?">¿Se paga algo?</h3><p data-en="It's free for everyone, and volunteering is unpaid. We accept donations to cover costs.">Es gratis para todos, y el voluntariado no es pagado. Aceptamos donaciones para cubrir costos.</p></div>
+      <div class="card"><h3 data-en="Do I have to be a professional?">¿Tengo que ser profesional?</h3><p data-en="No. If you fix things at home as a hobby, you already know enough to help at a table.">No. Si arreglas cosas en tu casa por hobby, ya sabes suficiente para ayudar en una mesa.</p></div>
+      <div class="card"><h3 data-en="Do I need to bring tools?">¿Tengo que llevar herramientas?</h3><p data-en="If you have your own, even better. If not, we'll sort out the basics before the event.">Si tienes las tuyas, mejor. Si no, coordinamos lo básico antes del evento.</p></div>
+      <div class="card"><h3 data-en="How long is an event?">¿Cuánto dura un evento?</h3><p data-en="About three or four hours, on a weekend. You don't have to stay the whole time.">Unas tres o cuatro horas, un fin de semana. No tienes que quedarte todo el tiempo.</p></div>
+      <div class="card"><h3 data-en="Does it cost anything?">¿Se paga algo?</h3><p data-en="It's free for everyone, and volunteering is unpaid. We accept donations to cover costs.">Es gratis para todos, y el voluntariado no es pagado. Aceptamos donaciones para cubrir costos.</p></div>
     </div>
   </div>
 </section>
@@ -219,8 +153,7 @@
 <div class="seam" aria-hidden="true">
   <svg viewBox="0 0 1200 36" preserveAspectRatio="none">
     <!-- Everything below the wave is filled ink, so the wave itself IS the
-         edge of the dark section — there is no straight seam left to show.
-         The cream above is the page background, dots and all. -->
+         edge of the dark section. -->
     <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7V36H0Z" fill="#141210"/>
     <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7" fill="none" stroke="#141210" stroke-width="10"/>
     <path d="M0 18c60-10 90 14 150 6s90-20 150-9 90 17 150 8 90-19 150-8 90 16 150 7 90-18 150-8 90 15 150 6 90-17 150-7" fill="none" stroke="#e5b415" stroke-width="4"/>
@@ -234,120 +167,103 @@
       <h2 class="h-lg" data-en="Sign up as a volunteer">Regístrate como voluntario</h2>
       <p data-en="You don't need to be an expert — just willing to help, with some experience in your category.">No necesitas ser experto — solo tener ganas de ayudar y algo de experiencia en tu categoría.</p>
     </div>
-    <svg class="form-doodle" viewBox="0 0 160 50" fill="none" aria-hidden="true">
-      <circle cx="2" cy="25" r="1.8" fill="#e5b415"/><circle cx="8" cy="31.4" r="2.2" fill="#e5b415"/>
-      <circle cx="14" cy="36.3" r="1.7" fill="#b5482a"/><circle cx="20" cy="38.8" r="2.1" fill="#e5b415"/>
-      <circle cx="26" cy="38.3" r="1.6" fill="#e5b415"/><circle cx="32" cy="34.9" r="2.3" fill="#b5482a"/>
-      <circle cx="38" cy="29.3" r="1.8" fill="#e5b415"/><circle cx="44" cy="22.8" r="2" fill="#e5b415"/>
-      <circle cx="50" cy="16.8" r="1.7" fill="#b5482a"/><circle cx="56" cy="12.5" r="2.2" fill="#e5b415"/>
-      <circle cx="62" cy="11" r="1.9" fill="#e5b415"/><circle cx="68" cy="12.5" r="1.6" fill="#e5b415"/>
-      <circle cx="74" cy="16.8" r="2.1" fill="#b5482a"/><circle cx="80" cy="22.8" r="1.8" fill="#e5b415"/>
-      <circle cx="86" cy="29.3" r="2" fill="#e5b415"/><circle cx="92" cy="34.9" r="1.7" fill="#e5b415"/>
-      <circle cx="98" cy="38.3" r="2.2" fill="#b5482a"/><circle cx="104" cy="38.8" r="1.8" fill="#e5b415"/>
-      <circle cx="110" cy="36.3" r="1.6" fill="#e5b415"/><circle cx="116" cy="31.4" r="2.1" fill="#e5b415"/>
-      <circle cx="122" cy="25" r="1.9" fill="#b5482a"/><circle cx="128" cy="18.6" r="1.7" fill="#e5b415"/>
-      <circle cx="134" cy="13.7" r="2.2" fill="#e5b415"/><circle cx="140" cy="11.2" r="1.8" fill="#e5b415"/>
-      <circle cx="146" cy="11.7" r="1.6" fill="#b5482a"/><circle cx="152" cy="15.1" r="2" fill="#e5b415"/>
-      <circle cx="158" cy="20.7" r="1.7" fill="#e5b415"/>
-    </svg>
     <div class="form-card">
-    <p class="err" id="errSend" style="margin-bottom:22px" data-en="Something went wrong sending the form. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal enviando el formulario. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
+    <p class="err" id="errSend" role="alert" style="margin:0 0 24px" data-en="Something went wrong sending the form. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal enviando el formulario. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
     <form id="vf" novalidate action="https://formspree.io/f/xyeygvag" method="POST">
       <div>
-        <label for="name" data-en="Full name">Nombre completo</label>
-        <input type="text" id="name" name="name" placeholder="Tu nombre" data-en-ph="Your name">
+        <label class="field-label" for="name" data-en="Full name">Nombre completo</label>
+        <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="errName" placeholder="Tu nombre" data-en-ph="Your name">
         <p class="err" id="errName" data-en="Enter your name.">Escribe tu nombre.</p>
       </div>
       <div>
-        <label for="email" data-en="Email">Correo electrónico</label>
-        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
+        <label class="field-label" for="email" data-en="Email">Correo electrónico</label>
+        <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required aria-describedby="errEmail" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
         <p class="err" id="errEmail" data-en="Enter a valid email.">Escribe un correo válido.</p>
       </div>
       <div>
-        <label for="phone" data-en="Phone (optional)">Teléfono (opcional)</label>
-        <input type="tel" id="phone" name="phone" placeholder="305-000-0000">
+        <label class="field-label" for="phone" data-en="Phone (optional)">Teléfono (opcional)</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="305-555-0123">
       </div>
       <div>
-        <label for="avail" data-en="Availability">Disponibilidad</label>
+        <label class="field-label" for="avail" data-en="Availability">Disponibilidad</label>
         <!-- Values stay in Spanish so submissions read consistently regardless of UI language. -->
         <select id="avail" name="disponibilidad">
           <option value="Fines de semana" data-en="Weekends">Fines de semana</option>
-          <option value="Entre semana, en la tarde" data-en="Weekdays, evenings">Entre semana, en la tarde</option>
+          <option value="Entre semana, en la tarde" data-en="Weekday evenings">Entre semana, en la tarde</option>
           <option value="Flexible" data-en="Flexible">Flexible</option>
         </select>
       </div>
-      <div class="full">
-        <label data-en="Which station would you like to help at?">¿En qué estación te gustaría ayudar?</label>
+      <fieldset class="full">
+        <legend class="field-label" data-en="Which station would you like to help at?">¿En qué estación te gustaría ayudar?</legend>
         <div class="checks">
-          <label><input type="checkbox" name="estaciones" value="Electrónica"> <span data-en="Electronics">Electrónica</span></label>
-          <label><input type="checkbox" name="estaciones" value="Muebles"> <span data-en="Furniture">Muebles</span></label>
-          <label><input type="checkbox" name="estaciones" value="Bicicletas"> <span data-en="Bicycles">Bicicletas</span></label>
-          <label><input type="checkbox" name="estaciones" value="Ropa y textiles"> <span data-en="Clothing &amp; textiles">Ropa y textiles</span></label>
-          <label><input type="checkbox" name="estaciones" value="General"> <span data-en="General">General</span></label>
+          <label class="check"><input type="checkbox" name="estaciones" value="Electrónica"> <span data-en="Electronics">Electrónica</span></label>
+          <label class="check"><input type="checkbox" name="estaciones" value="Muebles"> <span data-en="Furniture">Muebles</span></label>
+          <label class="check"><input type="checkbox" name="estaciones" value="Bicicletas"> <span data-en="Bikes">Bicicletas</span></label>
+          <label class="check"><input type="checkbox" name="estaciones" value="Ropa y textiles"> <span data-en="Clothing &amp; textiles">Ropa y textiles</span></label>
+          <label class="check"><input type="checkbox" name="estaciones" value="General"> <span data-en="General">General</span></label>
         </div>
+      </fieldset>
+      <div class="full">
+        <label class="field-label" for="exp" data-en="Tell us about your experience (optional)">Cuéntanos tu experiencia (opcional)</label>
+        <textarea id="exp" name="experiencia" placeholder="¿Qué sabes reparar? ¿Lo haces por trabajo, por hobby o ambos?" data-en-ph="What can you fix? Is it work, a hobby, or both?"></textarea>
       </div>
       <div class="full">
         <!-- Hidden field carries the value so the inbox always shows an
              explicit Sí/No; an unchecked box would otherwise send nothing. -->
         <input type="hidden" name="boletin" id="boletinField" value="Sí">
-        <label class="optin">
-          <input type="checkbox" id="boletinCb" checked>
-          <span data-en="Yes, send me the newsletter — events, dates, and what we're fixing.">Sí, mándame el boletín — eventos, fechas, y lo que estamos arreglando.</span>
-        </label>
-      </div>
-      <div class="full">
-        <label for="exp" data-en="Tell us about your experience (optional)">Cuéntanos tu experiencia (opcional)</label>
-        <textarea id="exp" name="experiencia" placeholder="¿Qué sabes reparar? ¿Lo haces por trabajo, hobby, o ambos?" data-en-ph="What can you repair? Is it work, a hobby, or both?"></textarea>
+        <div class="optin">
+          <label class="check">
+            <input type="checkbox" id="boletinCb" checked>
+            <span data-en="Also send me the newsletter: events, dates, and what we're fixing.">Mándame también el boletín: eventos, fechas y lo que estamos arreglando.</span>
+          </label>
+        </div>
       </div>
       <div class="full">
         <input type="hidden" name="_subject" value="Nuevo voluntario — Club de lo Roto">
         <button type="submit" class="btn btn-gold" data-en="Send sign-up →">Enviar registro →</button>
-        <p class="note" data-en="By submitting you agree that we may contact you about upcoming Club de lo Roto events. We don't share your information with anyone else.">Al enviar aceptas que te contactemos sobre próximos eventos de Club de lo Roto. No compartimos tu información con nadie más.</p>
+        <p class="note" data-en="By submitting, you agree that we can contact you about upcoming Club de lo Roto events. We don't share your information with anyone.">Al enviar, aceptas que te contactemos sobre próximos eventos de Club de lo Roto. No compartimos tu información con nadie.</p>
       </div>
     </form>
     </div>
   </div>
 </section>
+</main>
 
-<footer>
+<footer class="site-foot">
   <div class="wrap foot-nl" id="newsletter">
-    <div class="foot-nl-inner">
-      <div>
-        <p class="eyebrow" data-en="Newsletter">Boletín</p>
-        <h2 class="foot-nl-title" data-en="Get the newsletter">Recibe el boletín</h2>
-      </div>
-      <!-- Own form and own handler, kept apart from the volunteer form.
-           Swap the action for a dedicated Formspree form when you have one. -->
-      <form id="fnf" class="foot-nl-form" novalidate action="https://formspree.io/f/xyeygvag" method="POST">
-        <label class="sr-only" for="fnlEmail" data-en="Email">Correo electrónico</label>
-        <div class="foot-nl-row">
-          <input type="email" id="fnlEmail" name="email" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
-          <button type="submit" class="btn btn-gold" data-en="Sign up →">Suscribirme →</button>
-        </div>
-        <p class="err" id="fnlErrEmail" data-en="Enter a valid email.">Escribe un correo válido.</p>
-        <p class="err" id="fnlErrSend" data-en="Something went wrong. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
-        <p class="foot-nl-ok" id="fnlOk" data-en="You're on the list — we'll be in touch." hidden>Quedaste en la lista — te escribimos pronto.</p>
-        <input type="hidden" name="tipo" value="Boletín (pie de página)">
-        <input type="hidden" name="_subject" value="Nuevo suscriptor — Boletín Club de lo Roto">
-      </form>
+    <div>
+      <p class="eyebrow" data-en="Newsletter">Boletín</p>
+      <h2 data-en="Not ready to volunteer? Get the newsletter.">¿Aún no te animas? Recibe el boletín.</h2>
     </div>
+    <!-- Own form and own handler, kept apart from the volunteer form.
+         Swap the action for a dedicated Formspree form when you have one. -->
+    <form id="fnf" class="nl-form" novalidate action="https://formspree.io/f/xyeygvag" method="POST">
+      <label class="sr-only" for="fnlEmail" data-en="Email">Correo electrónico</label>
+      <div class="nl-row">
+        <input type="email" id="fnlEmail" name="email" autocomplete="email" inputmode="email" aria-describedby="fnlErrEmail" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
+        <button type="submit" class="btn btn-gold" data-en="Sign up →">Suscribirme →</button>
+      </div>
+      <p class="err" id="fnlErrEmail" data-en="Enter a valid email.">Escribe un correo válido.</p>
+      <p class="err" id="fnlErrSend" role="alert" data-en="Something went wrong. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
+      <p class="nl-ok" id="fnlOk" role="status" data-en="You're on the list — we'll be in touch." hidden>Quedaste en la lista — te escribimos pronto.</p>
+      <input type="hidden" name="tipo" value="Boletín (pie de página)">
+      <input type="hidden" name="_subject" value="Nuevo suscriptor — Boletín Club de lo Roto">
+    </form>
   </div>
   <div class="wrap frow">
-    <div class="fb"><img src="assets/logo-mark.svg" alt=""> Club de lo Roto</div>
+    <a class="fb" href="./"><img src="assets/logo-mark.svg" width="43" height="44" alt="Club de lo Roto" loading="lazy"></a>
     <div class="flinks">
-      <!-- Also the only route to the newsletter below 820px, where .navlinks hides. -->
       <a href="boletin.html" data-en="Newsletter">Boletín</a>
-      <a href="https://instagram.com/clubdeloroto">Instagram</a>
+      <a href="https://www.instagram.com/clubdeloroto/">Instagram</a>
       <a href="mailto:clubdeloroto@gmail.com">clubdeloroto@gmail.com</a>
     </div>
-    <div style="opacity:.6">Miami, FL</div>
+    <div class="fplace">Miami, FL</div>
   </div>
 </footer>
 
 <div class="modal" id="okModal" hidden>
   <div class="modal-backdrop" data-close></div>
-  <!-- Confetti sits above the backdrop but behind the card, so it reads as
-       bursting out from around the popup and never crosses the message. -->
+  <!-- Confetti sits above the backdrop but behind the card. -->
   <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="okTitle" aria-describedby="okBody">
     <button type="button" class="modal-x" data-close aria-label="Cerrar" data-en-aria="Close">×</button>
@@ -358,12 +274,12 @@
     <h2 id="okTitle" data-en="Thanks!">¡Gracias!</h2>
     <p id="okBody" data-en="We got your sign-up and we'll be in touch before the next event.">Recibimos tu registro y te contactaremos antes del próximo evento.</p>
     <div class="modal-actions">
-      <a href="boletin.html" class="btn btn-gold" id="okToNews" data-en="See what we're up to →">Mira qué estamos armando →</a>
+      <a href="https://www.instagram.com/clubdeloroto/" class="btn btn-gold" data-en="Follow on Instagram →">Síguenos en Instagram →</a>
       <button type="button" class="btn" data-close data-en="Close">Cerrar</button>
     </div>
   </div>
 </div>
 
-<script src="assets/app.js?v=3"></script>
+<script src="assets/app.js?v=4" defer></script>
 </body>
 </html>
