@@ -2,65 +2,85 @@
 <html lang="es" data-title-es="Boletín — Club de lo Roto" data-title-en="Newsletter — Club de lo Roto">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Boletín — Club de lo Roto</title>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=3">
+<meta name="description" content="The Club de lo Roto newsletter: event dates, where we'll be, and what we're fixing in Miami.">
+<link rel="canonical" href="https://clubdeloroto.com/boletin.html">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Club de lo Roto">
+<meta property="og:url" content="https://clubdeloroto.com/boletin.html">
+<meta property="og:title" content="Newsletter — Club de lo Roto">
+<meta property="og:description" content="Event dates, where we'll be, and what we're fixing in Miami.">
+<meta property="og:image" content="https://clubdeloroto.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Club de lo Roto logo — black hand-lettering on a gold circle — with the line: Bring what's broken. We sit down. We fix it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://clubdeloroto.com/assets/og-image.png">
+
+<link rel="icon" href="assets/logo-circle.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/plex-mono-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/plex-mono-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/styles.css?v=4">
 </head>
 <body>
+<a class="skip" href="#main" data-en="Skip to content">Saltar al contenido</a>
 
-<nav>
+<nav aria-label="Principal" data-en-aria="Main">
   <div class="wrap row">
-    <a class="brand" href="index.html"><img src="assets/logo-mark.svg" alt="Club de lo Roto"><b>Club de lo Roto</b></a>
+    <a class="brand" href="./"><img src="assets/logo-mark.svg" width="45" height="46" alt="Club de lo Roto"></a>
     <div class="navlinks">
-      <a href="index.html#idea" data-en="The idea">La idea</a>
-      <a href="index.html#estaciones" data-en="Stations">Estaciones</a>
-      <a href="index.html#como" data-en="How it works">Cómo funciona</a>
-      <a href="index.html#faq" data-en="FAQ">Preguntas</a>
-      <a href="boletin.html" class="is-current" data-en="Newsletter">Boletín</a>
+      <a href="./#idea" data-en="The idea">La idea</a>
+      <a href="./#estaciones" data-en="Stations">Estaciones</a>
+      <a href="./#como" data-en="How it works">Cómo funciona</a>
+      <a href="./#faq" data-en="FAQ">Preguntas</a>
+      <a href="boletin.html" aria-current="page" data-en="Newsletter">Boletín</a>
     </div>
     <div class="navright">
-      <a href="#newsletter" class="navlink-icon" aria-label="Newsletter">✉</a>
       <div class="langsw" role="group" aria-label="Idioma / Language">
-        <button type="button" data-lang="es" aria-pressed="true">ES</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="es" aria-pressed="true" lang="es" aria-label="Español">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
       </div>
-      <a href="index.html#voluntarios" class="btn btn-gold btn-nav" data-en="Volunteer">Sé voluntario</a>
+      <a href="./#voluntarios" class="btn btn-gold btn-nav" data-en="Volunteer">Sé voluntario</a>
     </div>
   </div>
 </nav>
 
+<main id="main">
 <section class="page-top" id="newsletter">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow" data-en="Newsletter">Boletín</p>
       <h1 class="h-lg" data-en="What we're up to">Qué estamos armando</h1>
-      <p data-en="Events, dates, and the occasional thing we managed to bring back to life.">Eventos, fechas, y alguna que otra cosa que logramos revivir.</p>
+      <p data-en="One email when there's news: event dates, where we'll be, and the occasional thing we managed to bring back to life.">Un correo cuando haya novedades: fechas, dónde vamos a estar y alguna que otra cosa que logramos revivir.</p>
     </div>
-    <div class="empty-card">
-      <img class="empty-illo" src="assets/illo-newsletter.svg" alt="">
-      <h2 data-en="This one's still on the repair table.">Esto todavía está en la mesa de reparación.</h2>
-      <p data-en="Nothing published yet — we're busy fixing other things first. Sign up and we'll let you know the moment the first issue is back in one piece.">Todavía no publicamos nada — estamos ocupados arreglando otras cosas primero. Regístrate y te avisamos apenas el primero esté entero.</p>
+    <div class="nl-card">
+      <img class="nl-illo" src="assets/illo-newsletter.svg" width="132" height="119" alt="">
+      <h2 data-en="Get the newsletter">Recibe el boletín</h2>
       <form id="nf" class="nl-form" novalidate action="https://formspree.io/f/xyeygvag" method="POST">
         <label class="sr-only" for="nlEmail" data-en="Email">Correo electrónico</label>
         <div class="nl-row">
-          <input type="email" id="nlEmail" name="email" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
-          <button type="submit" class="btn btn-gold" data-en="Sign me up →">Quiero que me avisen →</button>
+          <input type="email" id="nlEmail" name="email" autocomplete="email" inputmode="email" aria-describedby="nlErrEmail" placeholder="tucorreo@ejemplo.com" data-en-ph="you@example.com">
+          <button type="submit" class="btn btn-gold" data-en="Sign up →">Suscribirme →</button>
         </div>
         <p class="err" id="nlErrEmail" data-en="Enter a valid email.">Escribe un correo válido.</p>
-        <p class="err" id="nlErrSend" data-en="Something went wrong. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
+        <p class="err" id="nlErrSend" role="alert" data-en="Something went wrong. Try again, or write to us at clubdeloroto@gmail.com.">Algo salió mal. Intenta de nuevo o escríbenos a clubdeloroto@gmail.com.</p>
         <!-- Labels this as a newsletter sign-up in the shared Formspree inbox. -->
         <input type="hidden" name="tipo" value="Boletín">
         <input type="hidden" name="_subject" value="Nuevo suscriptor — Boletín Club de lo Roto">
       </form>
     </div>
+    <p style="margin-top:48px" data-en-html="Want to do more than read? &lt;a class=&quot;textlink&quot; href=&quot;./#voluntarios&quot;&gt;Sign up as a volunteer →&lt;/a&gt;">¿Quieres hacer algo más que leer? <a class="textlink" href="./#voluntarios">Regístrate como voluntario →</a></p>
   </div>
 </section>
+</main>
 
-<div class="marquee">
+<div class="marquee" aria-hidden="true">
   <div class="mtrack">
     <div class="mgroup">
       <span data-en="Bring what's broken">Trae lo roto</span><span>◆</span><span data-en="We fix it together">Lo arreglamos juntos</span><span>◆</span><span>Miami</span><span>◆</span><span data-en="To repair is to resist">Reparar es resistir</span><span>◆</span>
@@ -68,15 +88,15 @@
   </div>
 </div>
 
-<footer>
+<footer class="site-foot">
   <div class="wrap frow">
-    <a class="fb" href="index.html"><img src="assets/logo-mark.svg" alt=""> Club de lo Roto</a>
+    <a class="fb" href="./"><img src="assets/logo-mark.svg" width="43" height="44" alt="Club de lo Roto" loading="lazy"></a>
     <div class="flinks">
-      <a href="index.html" data-en="Home">Inicio</a>
-      <a href="https://instagram.com/clubdeloroto">Instagram</a>
+      <a href="./" data-en="Home">Inicio</a>
+      <a href="https://www.instagram.com/clubdeloroto/">Instagram</a>
       <a href="mailto:clubdeloroto@gmail.com">clubdeloroto@gmail.com</a>
     </div>
-    <div style="opacity:.6">Miami, FL</div>
+    <div class="fplace">Miami, FL</div>
   </div>
 </footer>
 
@@ -90,13 +110,13 @@
       <path d="M20 33l9 9 16-19" stroke="#141210" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <h2 id="okTitle" data-en="You're on the list!">¡Quedaste en la lista!</h2>
-    <p id="okBody" data-en="We'll write the moment the first issue is back in one piece.">Te escribimos apenas el primer boletín esté entero.</p>
+    <p id="okBody" data-en="We'll write when there's news.">Te escribimos cuando haya novedades.</p>
     <div class="modal-actions">
       <button type="button" class="btn btn-gold" data-close data-en="Close">Cerrar</button>
     </div>
   </div>
 </div>
 
-<script src="assets/app.js?v=3"></script>
+<script src="assets/app.js?v=4" defer></script>
 </body>
 </html>
