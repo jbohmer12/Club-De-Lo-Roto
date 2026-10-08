@@ -93,62 +93,71 @@
     apply(saved || (/^en\b/i.test(navigator.language||'') ? 'en' : 'es'));
   })();
 
-  /* Success modal + confetti. Flat rectangular pieces in the brand palette,
-     drawn on canvas — no gradients, matching the rest of the system. */
+  /* Confetti: flat rectangular pieces in the brand palette, drawn on a
+     canvas — no gradients, matching the rest of the system. Shared by the
+     success dialog and the footer newsletter. `origin` is the rect pieces
+     spray out of, in the canvas's coordinates; `keepGoing` lets the caller
+     stop the animation early (e.g. when the dialog closes). */
+  var COLORS=['#e5b415','#b98d0f','#b5482a','#2b6f68','#141210','#fff6eb'];
+  function reducedMotion(){
+    return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  function confetti(canvas,w,h,origin,keepGoing){
+    var ctx=canvas.getContext('2d');
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=w*dpr;canvas.height=h*dpr;
+    canvas.style.width=w+'px';canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var cx=origin.left+origin.width/2, cy=origin.top+origin.height/2;
+    var parts=[];
+    for(var i=0;i<90;i++){
+      var a=Math.random()*Math.PI*2, sp=4+Math.random()*7;
+      parts.push({
+        x:cx+(Math.random()-0.5)*origin.width*0.85,
+        y:cy+(Math.random()-0.5)*origin.height*0.55,
+        vx:Math.cos(a)*sp, vy:Math.sin(a)*sp-3.5,
+        w:5+Math.random()*6, h:3+Math.random()*4,
+        rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.32,
+        col:COLORS[i%COLORS.length]
+      });
+    }
+    var start=null,raf=null;
+    function frame(now){
+      if(start===null)start=now;
+      var t=now-start, life=Math.max(0,1-t/2600), alive=false;
+      ctx.clearRect(0,0,w,h);
+      for(var j=0;j<parts.length;j++){
+        var p=parts[j];
+        p.vy+=0.19; p.vx*=0.99; p.vy*=0.99;
+        p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+        if(life>0&&p.y<h+50)alive=true;
+        ctx.save();
+        ctx.globalAlpha=life;
+        ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        ctx.fillStyle=p.col;
+        ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        ctx.restore();
+      }
+      if(alive&&keepGoing())raf=requestAnimationFrame(frame);
+      else ctx.clearRect(0,0,w,h);
+    }
+    raf=requestAnimationFrame(frame);
+    return function stop(){if(raf)cancelAnimationFrame(raf);raf=null;ctx.clearRect(0,0,w,h)};
+  }
+
+  /* Success dialog. */
   var okModal=(function(){
     var modal=document.getElementById('okModal');
-    /* Pages without the sign-up form (e.g. the newsletter) have no dialog. */
+    /* Pages without a dialog (e.g. the 404) get a no-op. */
     if(!modal)return {open:function(){},close:function(){}};
     var card=modal.querySelector('.modal-card');
     var canvas=document.getElementById('confetti');
-    var ctx=canvas.getContext('2d');
-    var raf=null,lastFocus=null;
-    var COLORS=['#e5b415','#b98d0f','#b5482a','#2b6f68','#141210','#fff6eb'];
-    function reduced(){
-      return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
-    function clear(){ctx.clearRect(0,0,canvas.width,canvas.height)}
+    var stopConfetti=null,lastFocus=null;
     function burst(){
-      var dpr=Math.min(window.devicePixelRatio||1,2);
-      var w=modal.clientWidth,h=modal.clientHeight;
-      canvas.width=w*dpr;canvas.height=h*dpr;
-      canvas.style.width=w+'px';canvas.style.height=h+'px';
-      ctx.setTransform(dpr,0,0,dpr,0,0);
       var m=modal.getBoundingClientRect(),c=card.getBoundingClientRect();
-      var cx=c.left-m.left+c.width/2, cy=c.top-m.top+c.height/2;
-      var parts=[];
-      for(var i=0;i<90;i++){
-        var a=Math.random()*Math.PI*2, sp=4+Math.random()*7;
-        parts.push({
-          x:cx+(Math.random()-0.5)*c.width*0.85,
-          y:cy+(Math.random()-0.5)*c.height*0.55,
-          vx:Math.cos(a)*sp, vy:Math.sin(a)*sp-3.5,
-          w:5+Math.random()*6, h:3+Math.random()*4,
-          rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.32,
-          col:COLORS[i%COLORS.length]
-        });
-      }
-      var start=null;
-      function frame(now){
-        if(start===null)start=now;
-        var t=now-start, life=Math.max(0,1-t/2600), alive=false;
-        ctx.clearRect(0,0,w,h);
-        for(var j=0;j<parts.length;j++){
-          var p=parts[j];
-          p.vy+=0.19; p.vx*=0.99; p.vy*=0.99;
-          p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
-          if(life>0&&p.y<h+50)alive=true;
-          ctx.save();
-          ctx.globalAlpha=life;
-          ctx.translate(p.x,p.y); ctx.rotate(p.rot);
-          ctx.fillStyle=p.col;
-          ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-          ctx.restore();
-        }
-        if(alive&&!modal.hidden)raf=requestAnimationFrame(frame);
-        else clear();
-      }
-      raf=requestAnimationFrame(frame);
+      stopConfetti=confetti(canvas,modal.clientWidth,modal.clientHeight,
+        {left:c.left-m.left,top:c.top-m.top,width:c.width,height:c.height},
+        function(){return !modal.hidden});
     }
     function focusables(){
       return card.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
@@ -168,13 +177,12 @@
       document.body.style.overflow='hidden';
       document.addEventListener('keydown',onKey);
       card.querySelector('.modal-x').focus();
-      if(!reduced())burst();
+      if(!reducedMotion())burst();
     }
     function close(){
       if(modal.hidden)return;
       modal.hidden=true;
-      if(raf)cancelAnimationFrame(raf);
-      raf=null; clear();
+      if(stopConfetti){stopConfetti();stopConfetti=null}
       document.body.style.overflow='';
       document.removeEventListener('keydown',onKey);
       /* preventScroll: restoring focus to the submit button would otherwise
@@ -240,6 +248,21 @@
      form above, which expects fields these do not have. Two placements use
      it — the newsletter page and the footer — so the wiring is shared and
      each supplies its own success behaviour. */
+  /* Footer sign-up celebrates in place: a burst from the button on a
+     full-viewport overlay that never blocks clicks. */
+  function footerConfetti(from){
+    if(!from||reducedMotion())return;
+    var c=document.createElement('canvas');
+    c.className='confetti confetti-page';
+    c.setAttribute('aria-hidden','true');
+    document.body.appendChild(c);
+    var r=from.getBoundingClientRect();
+    confetti(c,window.innerWidth,window.innerHeight,
+      {left:r.left,top:r.top,width:Math.max(r.width,160),height:r.height},
+      function(){return true});
+    setTimeout(function(){c.remove()},3000);
+  }
+
   function wireNewsletter(ids,onSuccess){
     var form=document.getElementById(ids.form);
     if(!form)return;
@@ -279,5 +302,6 @@
     function(){
       var ok=document.getElementById('fnlOk');
       if(ok)ok.hidden=false;
+      footerConfetti(document.querySelector('#fnf button[type=submit]'));
     }
   );
