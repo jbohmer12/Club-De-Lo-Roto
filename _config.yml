@@ -1,0 +1,6 @@
+# GitHub Pages (Jekyll) settings. Internal notes stay in the repo but are not
+# published to clubdeloroto.com.
+exclude:
+  - CLAUDE.md
+  - PROJECT_BRIEF.md
+  - logo.png
